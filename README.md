@@ -8,5 +8,6 @@ Checks for the following issues:
   - Untranslated segments
 
 Takes three arguments to execute from the command line:
-python3 main.py file.tmx
+  python3 main.py file.tmx
+
 Results sent to stdout.
