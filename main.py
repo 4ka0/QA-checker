@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 '''
 Checks if numbers are consistent between source and target segments TMX file.
