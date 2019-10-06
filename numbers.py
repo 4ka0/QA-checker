@@ -7,7 +7,7 @@ import re
 Function for checking if numbers in Japanese segments are 
 present in corresponding English segments as actual digits.
 '''
-def digit_check(segments):
+def missing_number_check(segments):
 
     '''
     Uses regex to extract all digits from each Japanese and English segment.
@@ -46,4 +46,10 @@ def digit_check(segments):
         if len(segment.missing_nums) > 0:
             segment.errors_found = True
 
+    return segments
+
+'''
+Function for checking if extra numbers are included the English segment.
+'''
+def extra_number_check(segments):
     return segments

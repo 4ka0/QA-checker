@@ -36,4 +36,4 @@ def output_results(segments):
             print("\n")
 
     if errors_found_overall == False:
-        print("No errors found.")
+        print("NO ERRORS FOUND.")

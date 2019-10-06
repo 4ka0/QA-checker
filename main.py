@@ -11,7 +11,7 @@ Results sent to stdout.
 
 import sys
 import gather
-import digits
+import numbers
 import spaces
 import output
 
@@ -24,11 +24,11 @@ if file.lower().endswith(".tmx"):
     # Gather Japanese and English translation segments.
     segments = gather.gather_segments()
 
-    # Check for missing numbers appearing as digits.
-    segments = digits.digit_check(segments)
+    # Check for missing numbers appearing as numbers.
+    segments = numbers.missing_number_check(segments)
 
     # Check for extra numbers in the English text.
-    # segments = digits.digit_check(segments)
+    segments = numbers.extra_number_check(segments)
 
     # Check for double spaces
     segments = spaces.double_space_check(segments)
