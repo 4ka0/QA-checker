@@ -7,40 +7,40 @@ import re
 Function for checking if numbers in Japanese segments are 
 present in corresponding English segments as actual digits.
 '''
-def digitCheck(segments):
+def digit_check(segments):
 
     '''
     Uses regex to extract all digits from each Japanese and English segment.
     "\d" is a digit and "+" means 1 or more times, so "\d+"" means 1 or more digits.
     '''
     for segment in segments:
-        segment.japNums = re.findall(r'\d+', segment.jap)
-        segment.engNums = re.findall(r'\d+', segment.eng)
+        segment.jap_nums = re.findall(r'\d+', segment.jap_text)
+        segment.eng_nums = re.findall(r'\d+', segment.eng_text)
 
     # Identifies any digits that are missing from the Japanese segments.
     for segment in segments:
         
         '''
-        missingNums is a full copy of japNums to begin with.
-        Digits are then removed from missingNums when found.
+        missing_nums is a full copy of jap_nums to begin with.
+        Digits are then removed from missing_nums when found.
         '''
-        segment.missingNums = segment.japNums.copy()
+        segment.missing_nums = segment.jap_nums.copy()
         
         '''
-        engNumsCopy is a a full copy of engNums to begin with.
-        Digits are then removed from engNumsCopy when found.
+        eng_nums_copy is a a full copy of eng_nums to begin with.
+        Digits are then removed from eng_nums_copy when found.
         Using a copy here avoids altering the original list of found digits,
         and helps to counter the situation where there is more than one instance of a digits.
         '''
-        engNumsCopy = segment.engNums.copy()
+        eng_nums_copy = segment.eng_nums.copy()
 
         '''
-        Once this loop has finished, missingNums contains 
+        Once this loop has finished, missing_nums contains 
         only digits that have not been found in the Japanese segment.
         '''
-        for numeral in segment.japNums:
-            if numeral in engNumsCopy:
-                engNumsCopy.remove(numeral) # remove() deletes the first matching digit from the list.
-                segment.missingNums.remove(numeral)
+        for numeral in segment.jap_nums:
+            if numeral in eng_nums_copy:
+                eng_nums_copy.remove(numeral) # remove() deletes the first matching digit from the list.
+                segment.missing_nums.remove(numeral)
 
     return segments

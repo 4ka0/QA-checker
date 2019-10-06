@@ -4,23 +4,23 @@
 '''
 Function for outputting results.
 '''
-def outputResults(segments):
+def output_results(segments):
 
     print("\n****************")
     print("RESULTS:")
     
-    errorsFound = False
+    errors_found = False
 
     for segment in segments:
 
-        if len(segment.missingNums) > 0:
+        if len(segment.missing_nums) > 0:
         
-            errorsFound = True
+            errors_found = True
             print("MISSING NUMBER(S):")
-            print(segment.missingNums)
-            print(segment.jap)
-            print(segment.eng)
+            print(segment.missing_nums)
+            print(segment.jap_text)
+            print(segment.eng_text)
             print("\n")
 
-    if errorsFound == False:
+    if errors_found == False:
         print("No errors found.")

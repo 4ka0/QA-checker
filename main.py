@@ -12,8 +12,7 @@ Results sent to stdout.
 import sys
 import gather
 import digits
-# import ordinals
-import words
+import spaces
 import output
 
 # Get the last argument (filename) from the command line.
@@ -23,13 +22,13 @@ file = sys.argv[-1]
 if file.lower().endswith(".tmx"):
 
     # Gather Japanese and English translation segments.
-    segments = gather.gatherSegments()
+    segments = gather.gather_segments()
 
     # Check for missing numbers appearing as digits.
-    segments = digits.digitCheck(segments)
+    segments = digits.digit_check(segments)
 
     # Check for double spaces
-    segments = spaces.doubleSpaceCheck(segments)
+    segments = spaces.double_space_check(segments)
 
     # Check for repeated words
 
@@ -39,7 +38,7 @@ if file.lower().endswith(".tmx"):
     
 
     # output final results
-    output.outputResults(segments)
+    output.output_results(segments)
 
 else:
     print("\nINCORRECT FILE TYPE. ONLY TMX FILES ACCEPTED.\n")
