@@ -11,6 +11,6 @@ def double_space_check(segments):
     for segment in segments:
         if double_space_chars in segment.eng_text:
             segment.double_space = True
-            segment.errors_found = True
+            segment.error_found = True
 
     return segments

@@ -36,7 +36,7 @@ def missing_number_check(segments):
         eng_nums_copy = segment.eng_nums.copy()
 
         '''
-        After this loop , missing_nums contains only
+        After this loop, missing_nums contains only
         numbers that have not been found in the Japanese segment.
         '''
         for numeral in segment.jap_nums:
@@ -45,15 +45,29 @@ def missing_number_check(segments):
                 segment.missing_nums.remove(numeral)
 
         if len(segment.missing_nums) > 0:
-            segment.errors_found = True
+            segment.error_found = True
 
     return segments
 
 '''
 Function for checking if extra numbers are included the English segment.
+Essentially the same logic as above.
 '''
 def extra_number_check(segments):
 
-    
+    segments = extract_numbers(segments)
+
+    for segment in segments:
+
+        segment.extra_nums = segment.eng_nums.copy()
+        jap_nums_copy = segment.jap_nums.copy()
+
+        for numeral in segment.eng_nums:
+            if numeral in jap_nums_copy:
+                jap_nums_copy.remove(numeral)
+                segment.extra_nums.remove(numeral)
+
+        if len(segment.extra_nums) > 0:
+            segment.error_found = True
 
     return segments

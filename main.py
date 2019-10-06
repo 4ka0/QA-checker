@@ -13,6 +13,7 @@ import sys
 import gather
 import numbers
 import spaces
+import repeaters
 import output
 
 # Get the last argument (filename) from the command line.
@@ -34,13 +35,14 @@ if file.lower().endswith(".tmx"):
     segments = spaces.double_space_check(segments)
 
     # Check for repeated words
+    segments = repeaters.repeated_word_check(segments)
 
     # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
 
     # Check for untranslated segments
 
     # output final results
-    output.output_results(segments)
+    # output.output_results(segments)
 
 else:
     print("\nINCORRECT FILE TYPE. ONLY TMX FILES ACCEPTED.\n")

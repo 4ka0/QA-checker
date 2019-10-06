@@ -12,7 +12,7 @@ def output_results(segments):
 
     for segment in segments:
 
-        if segment.errors_found == True:
+        if segment.error_found == True:
 
             print("ERROR FOUND IN THE FOLLOWING SEGMENT.")
             print("JAPANESE TEXT:")
@@ -27,6 +27,9 @@ def output_results(segments):
                 errors_found_overall = True
 
             # Results for extra numbers
+            if len(segment.extra_nums) > 0:
+                print("EXTRA NUMBER FOUND: " + str(segment.extra_nums))
+                errors_found_overall = True
 
             # Results for double-spaces
             if segment.double_space == True:
