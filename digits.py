@@ -43,4 +43,7 @@ def digit_check(segments):
                 eng_nums_copy.remove(numeral) # remove() deletes the first matching digit from the list.
                 segment.missing_nums.remove(numeral)
 
+        if len(segment.missing_nums) > 0:
+            segment.errors_found = True
+
     return segments

@@ -27,6 +27,9 @@ if file.lower().endswith(".tmx"):
     # Check for missing numbers appearing as digits.
     segments = digits.digit_check(segments)
 
+    # Check for extra numbers in the English text.
+    # segments = digits.digit_check(segments)
+
     # Check for double spaces
     segments = spaces.double_space_check(segments)
 
@@ -35,7 +38,6 @@ if file.lower().endswith(".tmx"):
     # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
 
     # Check for untranslated segments
-    
 
     # output final results
     output.output_results(segments)
