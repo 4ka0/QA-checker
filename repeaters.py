@@ -26,13 +26,13 @@ def repeated_word_check(segments):
             previous_substring = ""
             for substring in substrings:
                 # remove punctuation chars from substring
-                cleaned_string = re.sub('[,.<>()/?=!@#$]', '', substring) # check this line
-                print(substring)
-                print(cleaned_string + "\n")
+                cleaned_string = re.sub('[,.<>()/?=!@#$]', '', substring) # CHECK THIS LINE
+                # print(substring)
+                # print(cleaned_string + "\n")
                 if previous_substring.lower() == cleaned_string.lower():
-                    print("... MATCH FOUND")
-                    print(previous_substring.lower())
-                    print(cleaned_string.lower() + "\n")
+                    # print("... MATCH FOUND")
+                    # print(previous_substring.lower())
+                    # print(cleaned_string.lower() + "\n")
                     segment.repeated_word = True
                     segment.error_found = True
                 previous_substring = cleaned_string

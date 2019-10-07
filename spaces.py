@@ -10,6 +10,11 @@ def double_space_check(segments):
 
     for segment in segments:
         if double_space_chars in segment.eng_text:
+
+        	'''
+        	should only be an error if not preceded by a full-stop
+        	'''
+
             segment.double_space = True
             segment.error_found = True
 
