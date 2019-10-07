@@ -2,10 +2,15 @@
 # -*- coding: utf-8 -*-
 
 '''
-Checks if numbers are consistent between source and target segments TMX file.
-A Japanese>English TMX file is assumed here.
-Requires three arguments to execute:
-python3 number-checker.py filename
+Program for performing various QA checks on a Jap>Eng TMX file.
+Checks for the following issues:
+    Inconsistent numbers (missing or extra numbers)
+    Double spaces etc.
+    Repeated words
+    Unpaired symbols such as parentheses
+    Untranslated segments
+Takes three arguments to execute from the command line:
+    python3 main.py filename/path
 Results sent to stdout.
 '''
 
