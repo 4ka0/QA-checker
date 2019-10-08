@@ -36,6 +36,13 @@ def output_results(segments):
                 print("DOUBLE-SPACE FOUND.")
                 errors_found_overall = True
 
+            # Results for repeated words
+            if segment.repeated_word == True:
+                print("REPEATED WORD FOUND.")
+                print(segment.repeated_words)
+                errors_found_overall = True
+
+
             print("\n")
 
     if errors_found_overall == False:

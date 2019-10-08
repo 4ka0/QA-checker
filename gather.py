@@ -14,7 +14,7 @@ Object for each Japanese-English segment.
 Includes actual segment text and numerous variables for QA checks.
 '''
 class Segment():
-    def __init__(self, jap_text="", eng_text="", jap_nums=[], eng_nums=[], error_found = False, missing_nums = [], extra_nums = [], double_space = False, repeated_word = False, unpaired_symbol = False, untranslated_seg = False):
+    def __init__(self, jap_text = "", eng_text = "", jap_nums = [], eng_nums = [], error_found = False, missing_nums = [], extra_nums = [], double_space = False, repeated_word = False, repeated_words = [], unpaired_symbol = False, untranslated_seg = False):
         self.jap_text = jap_text # Japanese text
         self.eng_text = eng_text # English text
         self.jap_nums = jap_nums # Numbers extracted from Japanese text
@@ -24,6 +24,7 @@ class Segment():
         self.extra_nums = extra_nums # Extra numbers found in English text
         self.double_space = double_space # Flag = True if double spaces found
         self.repeated_word = repeated_word # Flag = True if repeated words found
+        self.repeated_words = repeated_words # List of repeated words if any found
         self.unpaired_symbol = unpaired_symbol # Flag = True if unpaired symbols found (parentheses etc.)
         self.untranslated_seg = untranslated_seg # Flag = True if no English text is found
 

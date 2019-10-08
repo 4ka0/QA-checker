@@ -10,8 +10,6 @@ import re
 
 def repeated_word_check(segments):
 
-    repeated_words = []
-
     '''
     loop through japanese segment text
         compare last substring with current substring
@@ -21,20 +19,29 @@ def repeated_word_check(segments):
     '''
 
     for segment in segments:
-        substrings = segment.eng_text.split()
-        if substrings: # Proceeds only if list is populated.
+        # Only proceed if there is English text in the segment.
+        if segment.eng_text:
+            substrings = segment.eng_text.split()
+            print("\n" + str(substrings))
             previous_substring = ""
             for substring in substrings:
-                # remove punctuation chars from substring
-                cleaned_string = re.sub('[,.<>()/?=!@#$]', '', substring) # CHECK THIS LINE
-                # print(substring)
-                # print(cleaned_string + "\n")
-                if previous_substring.lower() == cleaned_string.lower():
-                    # print("... MATCH FOUND")
-                    # print(previous_substring.lower())
-                    # print(cleaned_string.lower() + "\n")
+                # remove punctuation chars etc. from currrent substring
+                current_string = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', substring)
+                if previous_substring.lower() == current_string.lower():
+                    print("... MATCH FOUND")
+                    print(previous_substring.lower())
+                    print(current_string.lower())
+                    segment.repeated_words.append(previous_substring + " " + current_string)
+                    print(segment.repeated_words)
                     segment.repeated_word = True
                     segment.error_found = True
-                previous_substring = cleaned_string
+                previous_substring = current_string
+
+    '''
+    add loop for catching two-word repetitions such as "may be may be"
+    '''
+
+
+    
 
     return segments
