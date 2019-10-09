@@ -8,6 +8,6 @@ Checks for the following issues:
   - Untranslated segments
 
 Takes three arguments to execute from the command line:
-  python3 main.py translationfile.tmx
+  python3 QA-checker.py <your tmx file>
 
 Results sent to stdout.

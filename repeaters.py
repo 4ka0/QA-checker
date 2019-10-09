@@ -22,17 +22,17 @@ def repeated_word_check(segments):
         # Only proceed if there is English text in the segment.
         if segment.eng_text:
             substrings = segment.eng_text.split()
-            print("\n" + str(substrings))
+            # print("\n" + str(substrings))
             previous_substring = ""
             for substring in substrings:
                 # remove punctuation chars etc. from currrent substring
                 current_string = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', substring)
                 if previous_substring.lower() == current_string.lower():
-                    print("... MATCH FOUND")
-                    print(previous_substring.lower())
-                    print(current_string.lower())
+                    # print("... MATCH FOUND")
+                    # print(previous_substring.lower())
+                    # print(current_string.lower())
                     segment.repeated_words.append(previous_substring + " " + current_string)
-                    print(segment.repeated_words)
+                    # print(segment.repeated_words)
                     segment.repeated_word = True
                     segment.error_found = True
                 previous_substring = current_string

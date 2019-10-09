@@ -10,7 +10,7 @@ Checks for the following issues:
     Unpaired symbols such as parentheses
     Untranslated segments
 Takes three arguments to execute from the command line:
-    python3 main.py filename/path
+    python3 QA-checker.py <your tmx file>
 Results sent to stdout.
 '''
 
@@ -47,7 +47,7 @@ if file.lower().endswith(".tmx"):
     # Check for untranslated segments
 
     # output final results
-    # output.output_results(segments)
+    output.output_results(segments)
 
 else:
     print("\nINCORRECT FILE TYPE. ONLY TMX FILES ACCEPTED.\n")
