@@ -38,8 +38,7 @@ def output_results(segments):
 
             # Results for repeated words
             if segment.repeated_word == True:
-                print("REPEATED WORD FOUND.")
-                print(segment.repeated_words)
+                print("REPEATED WORD FOUND: " + str(segment.repeated_words))
                 errors_found_overall = True
 
 

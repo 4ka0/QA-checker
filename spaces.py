@@ -6,15 +6,12 @@ Function for checking if more than one consecutive space appears in an English s
 '''
 def double_space_check(segments):
 
-    double_space_chars = "  "
+    double_space = "  "
+    exception = ".  " # Not treated as an error
 
     for segment in segments:
-        if double_space_chars in segment.eng_text:
 
-            '''
-            should only be an error if not preceded by a full-stop
-            '''
-
+        if double_space in segment.eng_text and exception not in segment.eng_text:
             segment.double_space = True
             segment.error_found = True
 
