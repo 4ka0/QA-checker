@@ -41,7 +41,7 @@ if file.lower().endswith(".tmx"):
 
     # Check for repeated words
     segments = repeaters.single_word_check(segments)
-    # segments = repeaters.double_word_check(segments)
+    segments = repeaters.double_word_check(segments)
 
     # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
 

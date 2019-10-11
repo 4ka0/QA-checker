@@ -38,6 +38,8 @@ def double_word_check(segments):
 
     for segment in segments:
 
+        # CONTINUE FROM HERE !!!!!!!
+
         # Only proceed if there is English text in the segment.
         if segment.eng_text:
             previous_substring = ""
