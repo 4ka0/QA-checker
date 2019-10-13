@@ -19,6 +19,7 @@ import gather
 import numbers
 import spaces
 import repeaters
+import unpaired
 import output
 
 # Get the last argument (filename) from the command line.
@@ -44,6 +45,7 @@ if file.lower().endswith(".tmx"):
     segments = repeaters.double_word_check(segments)
 
     # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
+    segments = unpaired.unpaired_symbol_check(segments)
 
     # Check for untranslated segments
 

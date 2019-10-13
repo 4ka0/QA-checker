@@ -23,12 +23,18 @@ def output_results(segments):
 
             # Results for missing numbers
             if len(segment.missing_nums) > 0:
-                print("MISSING NUMBER FOUND: " + str(segment.missing_nums))
+                if len(segment.missing_nums) > 1:
+                    print("MISSING NUMBERS FOUND: " + str(segment.missing_nums))
+                else:
+                    print("MISSING NUMBER FOUND: " + str(segment.missing_nums))
                 errors_found_overall = True
 
             # Results for extra numbers
             if len(segment.extra_nums) > 0:
-                print("EXTRA NUMBER FOUND: " + str(segment.extra_nums))
+                if len(segment.extra_nums) > 1:
+                    print("EXTRA NUMBERS FOUND: " + str(segment.extra_nums))
+                else:
+                    print("EXTRA NUMBER FOUND: " + str(segment.extra_nums))
                 errors_found_overall = True
 
             # Results for double-spaces
@@ -38,9 +44,8 @@ def output_results(segments):
 
             # Results for repeated words
             if segment.repeated_word == True:
-                print("REPEATED WORD FOUND: " + str(segment.repeated_words))
+                print("REPEATED WORDS FOUND: " + str(segment.repeated_words))
                 errors_found_overall = True
-
 
             print("\n")
 
