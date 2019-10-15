@@ -47,6 +47,14 @@ def output_results(segments):
                 print("REPEATED WORDS FOUND: " + str(segment.repeated_words))
                 errors_found_overall = True
 
+            # Results for unpaired symbols
+            if segment.unpaired_symbol == True:
+                if len(segment.missing_symbols) > 1:
+                    print("UNPAIRED SYMBOLS FOUND: " + str(segment.missing_symbols))
+                else:
+                    print("UNPAIRED SYMBOL FOUND: " + str(segment.missing_symbols))
+                errors_found_overall = True
+
             print("\n")
 
     if errors_found_overall == False:

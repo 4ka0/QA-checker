@@ -3,13 +3,6 @@
 
 import re
 
-'''
-Function for removong punctuation chars etc. from a string.
-'''
-def clean_string(text):
-    clean_text = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', text)
-    return clean_text
-
 
 '''
 Function for checking to see if there are any single repeating words in the English text.
@@ -70,3 +63,11 @@ def double_word_check(segments):
                 i += 1
 
     return segments
+
+
+'''
+Function for removing punctuation chars etc. from a string.
+'''
+def clean_string(text):
+    clean_text = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', text)
+    return clean_text
