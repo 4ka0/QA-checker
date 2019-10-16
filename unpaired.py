@@ -6,58 +6,63 @@ Function for checking for unpaired symbols such as quotation marks, brackets, pa
 '''
 def unpaired_symbol_check(segments):
 
-    '''
-    (logic similar to missing numbers)
-    loop through string
-        find starting symbols and add to list
-        find ending symbols and add to list
-    loop through starting symbol list
-        look for coresponding ending symbol
-        if found: remove starting symbol from starting symbol list
-                : remove ending symbol from ending symbol list
-        any remaining in starting symbol list = missing starting symbol
-    loop through ending symbol list
-        do opposite of above loop to find missing ending symbols
+    # Dict containing starting symbols and corresponding ending symbols
+    starting_symbols = {"(":")", "[":"]", "{":"}", "<":">"}
 
-    starting symbols = (, [, {, <, ", '
-    ending symbols = ), ], }, >, ", '
-    '''
+    # Dict containing ending symbols and corresponding starting symbols
+    ending_symbols = {")":"(", "]":"[", "}":"{", ">":"<"}
 
-    # Dict containing starting symbols and their corresponding ending symbols
-    starting_symbols = {"(":")", "[":"]", "{":"}", "<":">", "\"":"\"", "\'":"\'"}
-    ending_symbols = {")":"(", "]":"[", "}":"{", ">":"<", "\"":"\"", "\'":"\'"}
-
-    # BUG - doesn't find missing parenthesis in "(see Figs. (2, 3, 5, and 6)"
-
-    # check for missing ending symbols
     for segment in segments:
+
         eng_text_copy = segment.eng_text
-        # print("\n" + eng_text_copy)
+        
+        # Look for starting symbols
         for symbol in starting_symbols:
-            # print("Target symbol: " + symbol)
-            # check to see if starting symbol is present
-            if symbol in eng_text_copy:
-                # print("Starting symbol found: " + symbol)
-                # check to see if corresponding ending symbol is present
+        
+            while symbol in eng_text_copy:
+        
                 if starting_symbols[symbol] in eng_text_copy:
-                    # print("Ending symbol found: " + starting_symbols[symbol])
-                    # ending symbol found = no error
-                    # replace both symbols in copy with "@" so not searched again
+                    # Ending symbol found, no error
+                    # Replace both symbols in copy with "@" so not found again
                     eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
                     eng_text_copy = eng_text_copy.replace(starting_symbols[symbol], "@", 1)
+        
                 else:
-                    # print("Ending symbol not found: " + starting_symbols[symbol])
-                    # ending symbol not found = error
-                    # replace starting symbol in copy with "@" so not searched again
+                    # Ending symbol not found, error
+                    # Replace starting symbol in copy with "@" so not found again
                     eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
-                    # add symbol to list of missing symbols
-                    segment.missing_symbols.append(symbol)
-                    # raise errors
-                    segment.unpaired_symbol = True
+                    segment.unpaired_symbols.append(symbol)
+                    segment.unpaired_symbol_found = True
                     segment.error_found = True
-            # print("eng_text_copy: ")
-            # print(eng_text_copy)
 
+        # Look for ending symbols, similar to above
+        for symbol in ending_symbols:
+        
+            while symbol in eng_text_copy:
+        
+                if ending_symbols[symbol] in eng_text_copy:
+                    eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
+                    eng_text_copy = eng_text_copy.replace(ending_symbols[symbol], "@", 1)
+        
+                else:
+                    eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
+                    segment.unpaired_symbols.append(symbol)
+                    segment.unpaired_symbol_found = True
+                    segment.error_found = True
 
+        # Look for double quotation marks, if found, should be multiple of 2
+        if "\"" in eng_text_copy:
+            if eng_text_copy.count("\"") % 2 != 0:
+                segment.unpaired_symbols.append("\"")
+                segment.unpaired_symbol_found = True
+                segment.error_found = True
+
+        # Look for single quotation marks, similar to above
+        # BUG - picks up apostrophe marks as unpaired single quotations marks
+        if "\'" in eng_text_copy:
+            if eng_text_copy.count("\'") % 2 != 0:
+                segment.unpaired_symbols.append("\'")
+                segment.unpaired_symbol_found = True
+                segment.error_found = True
 
     return segments

@@ -14,7 +14,7 @@ Object for each Japanese-English segment.
 Includes actual segment text and numerous variables for QA checks.
 '''
 class Segment():
-    def __init__(self, jap_text, eng_text, jap_nums, eng_nums, error_found, missing_nums, extra_nums, double_space, repeated_word, repeated_words, unpaired_symbol, missing_symbols, untranslated_seg):
+    def __init__(self, jap_text, eng_text, jap_nums, eng_nums, error_found, missing_nums, extra_nums, double_space_found, repeated_word_found, repeated_words, unpaired_symbol_found, unpaired_symbols, untranslated_seg):
         self.jap_text = jap_text # String, Japanese text
         self.eng_text = eng_text # String, English text
         self.jap_nums = jap_nums # List of ints, numbers extracted from Japanese text
@@ -22,11 +22,11 @@ class Segment():
         self.error_found = error_found # Boolean = True if any errors are found
         self.missing_nums = missing_nums # List of ints, numbers missing from English text
         self.extra_nums = extra_nums # List of ints, extra numbers found in English text
-        self.double_space = double_space # Boolean, True if double spaces found
-        self.repeated_word = repeated_word # Boolean, True if repeated words found
+        self.double_space_found = double_space_found # Boolean, True if double spaces found
+        self.repeated_word_found = repeated_word_found # Boolean, True if repeated words found
         self.repeated_words = repeated_words # List of strings, repeated words if any found
-        self.unpaired_symbol = unpaired_symbol # Boolean, True if unpaired symbols found (parentheses etc.)
-        self.missing_symbols = missing_symbols # List of missing paired symbols if any found
+        self.unpaired_symbol_found = unpaired_symbol_found # Boolean, True if unpaired symbols found (parentheses etc.)
+        self.unpaired_symbols = unpaired_symbols # List of missing paired symbols if any found
         self.untranslated_seg = untranslated_seg # Boolean, True if no English text is found
 
 '''

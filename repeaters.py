@@ -18,11 +18,12 @@ def single_word_check(segments):
             substrings = segment.eng_text.split()
 
             for substring in substrings:
-                current_string = clean_string(substring)
+                # current_string = clean_string(substring)
+                current_string = substring
 
                 if previous_substring.lower() == current_string.lower():
                     segment.error_found = True
-                    segment.repeated_word = True
+                    segment.repeated_word_found = True
                     segment.repeated_words.append(previous_substring + " " + current_string)
 
                 previous_substring = current_string
@@ -50,14 +51,14 @@ def double_word_check(segments):
             i = 0
             while (i + 3) < len(substrings):
                 substring_A = substrings[i] + " " + substrings[i + 1]
-                substring_A = clean_string(substring_A)
+                # substring_A = clean_string(substring_A)
                 substring_B = substrings[i + 2] + " " + substrings[i + 3]
-                substring_B = clean_string(substring_B)
+                # substring_B = clean_string(substring_B)
 
                 # Compare substrings
                 if substring_A == substring_B:
                     segment.error_found = True
-                    segment.repeated_word = True
+                    segment.repeated_word_found = True
                     segment.repeated_words.append(substring_A + " " + substring_B)
 
                 i += 1

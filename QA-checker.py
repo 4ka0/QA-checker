@@ -47,6 +47,8 @@ if file.lower().endswith(".tmx"):
     # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
     segments = unpaired.unpaired_symbol_check(segments)
 
+    # Check for missing alphanumerical combinations (e.g. 符号 refnums)
+
     # Check for untranslated segments
 
     # output final results
