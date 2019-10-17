@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 import re
 
 
-'''
+def single_word_check(segments):
+"""
 Function for checking to see if there are any single repeating words in the English text.
 Common examples include "the the" and "is is".
-'''
-def single_word_check(segments):
+"""
 
     for segment in segments:
 
@@ -31,10 +32,10 @@ def single_word_check(segments):
     return segments
 
 
-'''
+"""
 Function for checking to see if there are any repeating two-word combinations in the English text.
 Common examples include "of the of the" and "will be will be".
-'''
+"""
 def double_word_check(segments):
 
     for segment in segments:
@@ -44,10 +45,10 @@ def double_word_check(segments):
 
             substrings = segment.eng_text.split()
 
-            '''
+            """
             Loop through substrings one by one.
             Build and compare two-word combinations based on current substring and next substring.
-            '''
+            """
             i = 0
             while (i + 3) < len(substrings):
                 substring_A = substrings[i] + " " + substrings[i + 1]
@@ -66,9 +67,9 @@ def double_word_check(segments):
     return segments
 
 
-'''
+"""
 Function for removing punctuation chars etc. from a string.
-'''
+"""
 def clean_string(text):
     clean_text = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', text)
     return clean_text

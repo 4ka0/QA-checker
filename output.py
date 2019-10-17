@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''
-Function for outputting results.
-'''
+
 def output_results(segments):
+"""
+Function for outputting results.
+"""
 
     print("\n****************\nRESULTS:\n")
 
@@ -64,10 +65,10 @@ def output_results(segments):
         print("NO ERRORS FOUND.")
 
 
-'''
+"""
 Function for building a single string from given list of elements.
 E.g. building a single string from all ints in the missing_nums list of a given segment.
-'''
+"""
 def build_error_string(error_list):
 	error_string = ""
 	for item in error_list:

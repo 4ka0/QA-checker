@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''
-Function for checking for unpaired symbols such as quotation marks, brackets, parentheses, etc.
-'''
+
 def unpaired_symbol_check(segments):
+"""
+Function for checking for unpaired symbols such as quotation marks,
+brackets, and parentheses.
+"""
+
+    """
+    Better method for checking unpaired symbols
+        Simply count instances of (
+        Then count instances of )
+        Should match
+        (Based on method for checking quote marks)
+    """
+
 
     # Dict containing starting symbols and corresponding ending symbols
     starting_symbols = {"(":")", "[":"]", "{":"}", "<":">"}
@@ -15,18 +26,18 @@ def unpaired_symbol_check(segments):
     for segment in segments:
 
         eng_text_copy = segment.eng_text
-        
+
         # Look for starting symbols
         for symbol in starting_symbols:
-        
+
             while symbol in eng_text_copy:
-        
+
                 if starting_symbols[symbol] in eng_text_copy:
                     # Ending symbol found, no error
                     # Replace both symbols in copy with "@" so not found again
                     eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
                     eng_text_copy = eng_text_copy.replace(starting_symbols[symbol], "@", 1)
-        
+
                 else:
                     # Ending symbol not found, error
                     # Replace starting symbol in copy with "@" so not found again
@@ -37,13 +48,13 @@ def unpaired_symbol_check(segments):
 
         # Look for ending symbols, similar to above
         for symbol in ending_symbols:
-        
+
             while symbol in eng_text_copy:
-        
+
                 if ending_symbols[symbol] in eng_text_copy:
                     eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
                     eng_text_copy = eng_text_copy.replace(ending_symbols[symbol], "@", 1)
-        
+
                 else:
                     eng_text_copy = eng_text_copy.replace(symbol, "@", 1)
                     segment.unpaired_symbols.append(symbol)
