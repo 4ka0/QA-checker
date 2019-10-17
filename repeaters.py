@@ -6,10 +6,10 @@ import re
 
 
 def single_word_check(segments):
-"""
-Function for checking to see if there are any single repeating words in the English text.
-Common examples include "the the" and "is is".
-"""
+    """
+    Function for checking to see if there are any single repeating words in the English text.
+    Common examples include "the the" and "is is".
+    """
 
     for segment in segments:
 

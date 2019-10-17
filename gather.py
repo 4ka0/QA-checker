@@ -14,7 +14,7 @@ from translate.storage.tmx import tmxfile
 
 class Segment():
     """
-    Object for each Japanese-English segment.
+    Used to create an object for each Japanese-English segment.
     Includes actual segment text and numerous variables for QA checks.
     """
 
@@ -40,13 +40,13 @@ def gather_segments():
     Function for gathering translations segments from a TMX file.
     """
 
-    file = sys.argv[-1] # Gets last command line argument (filename here)
+    file = sys.argv[-1] # Gets last command line argument (filename)
     with open(file, 'rb') as f:
         tmx_file = tmxfile(f)
 
     segments = [] # List of Segment objects
 
-    # Iterates oves TMX file and extracts text from segments.
+    # Iterates over TMX file and extracts text from segments.
     for node in tmx_file.unit_iter():
         jap_text = node.getsource()
         eng_text = node.gettarget()

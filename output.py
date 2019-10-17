@@ -3,9 +3,9 @@
 
 
 def output_results(segments):
-"""
-Function for outputting results.
-"""
+    """
+    Function for outputting QA check results.
+    """
 
     print("\n****************\nRESULTS:\n")
 
@@ -47,7 +47,8 @@ Function for outputting results.
 
             # Results for repeated words
             if segment.repeated_word_found == True:
-                print("REPEATED WORDS FOUND: " + str(segment.repeated_words))
+                repeated_word_string = build_error_string(segment.repeated_words)
+                print("REPEATED WORDS FOUND: " + repeated_word_string)
                 errors_found_overall = True
 
             # Results for unpaired symbols
@@ -65,14 +66,14 @@ Function for outputting results.
         print("NO ERRORS FOUND.")
 
 
-"""
-Function for building a single string from given list of elements.
-E.g. building a single string from all ints in the missing_nums list of a given segment.
-"""
 def build_error_string(error_list):
-	error_string = ""
-	for item in error_list:
-		error_string = error_string + str(item) + ", "
-	# Remove final unnecessary comma
-	error_string = error_string[0:-2]
-	return error_string
+    """
+    Function for building a single string from given list of elements.
+    E.g. building a single string from all ints in the missing_nums list of a given segment.
+    """
+    error_string = ""
+    for item in error_list:
+        error_string = error_string + str(item) + ", "
+    # Remove final unnecessary comma
+    error_string = error_string[0:-2]
+    return error_string

@@ -3,9 +3,10 @@
 
 
 def double_space_check(segments):
-"""
-Function for checking if more than one consecutive space appears in an English segment.
-"""
+    """
+    Function for checking if more than one consecutive space
+    appears in an English segment.
+    """
 
     double_space = "  "
     exception = ".  " # Not treated as an error
