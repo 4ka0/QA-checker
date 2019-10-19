@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-"""
+'''
 Translate-toolkit used to parse TMX file.
 http://docs.translatehouse.org/projects/translate-toolkit/en/latest/api/storage.html#module-translate.storage.tmx
-"""
+'''
 
 
 import sys
@@ -13,10 +13,10 @@ from translate.storage.tmx import tmxfile
 
 
 class Segment():
-    """
+    '''
     Used to create an object for each Japanese-English segment.
     Includes actual segment text and numerous variables for QA checks.
-    """
+    '''
 
     def __init__(self, jap_text, eng_text, jap_nums, eng_nums, error_found, missing_nums, extra_nums, double_space_found, repeated_word_found, repeated_words, unpaired_symbol_found, unpaired_symbols, untranslated_seg):
         self.jap_text = jap_text # String, Japanese text
@@ -36,9 +36,9 @@ class Segment():
 
 
 def gather_segments():
-    """
+    '''
     Function for gathering translations segments from a TMX file.
-    """
+    '''
 
     file = sys.argv[-1] # Gets last command line argument (filename)
     with open(file, 'rb') as f:

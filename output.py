@@ -3,9 +3,9 @@
 
 
 def output_results(segments):
-    """
+    '''
     Function for outputting QA check results.
-    """
+    '''
 
     print("\n****************\nRESULTS:\n")
 
@@ -67,10 +67,10 @@ def output_results(segments):
 
 
 def build_error_string(error_list):
-    """
+    '''
     Function for building a single string from given list of elements.
     E.g. building a single string from all ints in the missing_nums list of a given segment.
-    """
+    '''
     error_string = ""
     for item in error_list:
         error_string = error_string + str(item) + ", "
