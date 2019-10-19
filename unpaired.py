@@ -48,6 +48,7 @@ def unpaired_symbol_check(segments):
 
         # Look for single quotation marks, similar to above
         # BUG - PICKS UP APOSTROPHE MARKS AS UNPAIRED SINGLE QUOTATIONS MARKS
+        # start single quote always preceded by space " \'"
         if "\'" in segment.eng_text:
             if segment.eng_text.count("\'") % 2 != 0:
                 segment.unpaired_symbols.append("\'\'")
