@@ -5,10 +5,10 @@
 def unpaired_symbol_check(segments):
     '''
     Function for checking for unpaired symbols including parentheses,
-    square brackets, angle brackets, braces, and double quotation marks.
+    square brackets, braces, and double quotation marks.
     '''
 
-    symbol_pairs = {"(":")", "[":"]", "<":">", "{":"}"}
+    symbol_pairs = {"(":")", "[":"]", "{":"}"}
 
     '''
     Dict containing number of instances of each symbol
@@ -26,8 +26,10 @@ def unpaired_symbol_check(segments):
         '''
         for start_symbol in symbol_pairs:
             end_symbol = symbol_pairs[start_symbol]
-            symbol_counts[start_symbol] = segment.eng_text.count(start_symbol)
-            symbol_counts[end_symbol] = segment.eng_text.count(end_symbol)
+            symbol_counts[start_symbol] = \
+                segment.eng_text.count(start_symbol)
+            symbol_counts[end_symbol] = \
+                segment.eng_text.count(end_symbol)
 
         # Compare instances of start and end symbols (should match)
         for start_symbol in symbol_pairs:
@@ -35,11 +37,14 @@ def unpaired_symbol_check(segments):
             end_symbol = symbol_pairs[start_symbol]
             end_symbol_count = symbol_counts[end_symbol]
             if start_symbol_count != end_symbol_count:
-                segment.unpaired_symbols.append(start_symbol + end_symbol)
+                segment.unpaired_symbols.append(start_symbol+end_symbol)
                 segment.unpaired_symbol_found = True
                 segment.error_found = True
 
-        # Look for double quotation marks, if found, should be multiple of 2
+        '''
+        Look for double quotation marks
+        If found, should be multiple of 2
+        '''
         if "\"" in segment.eng_text:
             if segment.eng_text.count("\"") % 2 != 0:
                 segment.unpaired_symbols.append("\"\"")

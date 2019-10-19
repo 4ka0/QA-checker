@@ -53,7 +53,8 @@ def output_results(segments):
 
             # Results for unpaired symbols
             if segment.unpaired_symbol_found == True:
-                unpaired_symbol_string = build_error_string(segment.unpaired_symbols)
+                unpaired_symbol_string = \
+                    build_error_string(segment.unpaired_symbols)
                 if len(segment.unpaired_symbols) > 1:
                     print("POSSIBLE UNPAIRED SYMBOLS FOUND: " + unpaired_symbol_string)
                 else:
@@ -68,8 +69,9 @@ def output_results(segments):
 
 def build_error_string(error_list):
     '''
-    Function for building a single string from given list of elements.
-    E.g. building a single string from all ints in the missing_nums list of a given segment.
+    Function for building a single string from
+    given list of elements. E.g. building a single string from
+    all ints in the missing_nums list of a given segment.
     '''
     error_string = ""
     for item in error_list:

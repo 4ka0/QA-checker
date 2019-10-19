@@ -14,13 +14,13 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 '''
 
-
 import sys
 import gather
 import numbers
 import spaces
 import repeaters
 import unpaired
+import alphanums
 import output
 
 
@@ -33,10 +33,8 @@ if file.lower().endswith(".tmx"):
     # Gather Japanese and English translation segments.
     segments = gather.gather_segments()
 
-    # Check for missing numbers appearing as numbers.
+    # Check for missing/extra numbers appearing as numbers.
     segments = numbers.missing_number_check(segments)
-
-    # Check for extra numbers in the English text.
     segments = numbers.extra_number_check(segments)
 
     # Check for double spaces
@@ -46,10 +44,11 @@ if file.lower().endswith(".tmx"):
     segments = repeaters.single_word_check(segments)
     segments = repeaters.double_word_check(segments)
 
-    # Check for unpaired symbols such as quotation marks, brackets, parentheses, etc.
+    # Check for unpaired symbols such as parentheses
     segments = unpaired.unpaired_symbol_check(segments)
 
     # Check for missing alphanumerical combinations (e.g. 符号 refnums)
+    segments = alphanums.alphanum_check(segments)
 
     # Check for untranslated segments
 
