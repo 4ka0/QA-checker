@@ -53,7 +53,7 @@ if file.lower().endswith(".tmx"):
     # Check for untranslated segments
 
     # output final results
-    output.output_results(segments)
+    # output.output_results(segments)
 
 else:
     print("\nINCORRECT FILE TYPE. ONLY TMX FILES ACCEPTED.\n")
