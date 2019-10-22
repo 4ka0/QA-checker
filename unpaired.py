@@ -8,7 +8,7 @@ def unpaired_symbol_check(segments):
     square brackets, braces, and double quotation marks.
     '''
 
-    symbol_pairs = {"(":")", "[":"]", "{":"}"}
+    symbol_pairs = {'(':')', '[':']', '{':'}'}
 
     '''
     Dict containing number of instances of each symbol
@@ -21,8 +21,8 @@ def unpaired_symbol_check(segments):
         '''
         Count instances of each symbol and add to dictionary
         Key = symbol, value = number of instances of that symbol
-        start_symbol = "(", for example
-        end_symbol = ")", for example
+        start_symbol = '(', for example
+        end_symbol = ')', for example
         '''
         for start_symbol in symbol_pairs:
             end_symbol = symbol_pairs[start_symbol]
@@ -45,9 +45,9 @@ def unpaired_symbol_check(segments):
         Look for double quotation marks
         If found, should be multiple of 2
         '''
-        if "\"" in segment.eng_text:
-            if segment.eng_text.count("\"") % 2 != 0:
-                segment.unpaired_symbols.append("\"\"")
+        if '\"' in segment.eng_text:
+            if segment.eng_text.count('\"') % 2 != 0:
+                segment.unpaired_symbols.append('\"\"')
                 segment.unpaired_symbol_found = True
                 segment.error_found = True
 

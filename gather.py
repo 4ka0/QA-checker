@@ -50,9 +50,11 @@ class Segment():
         self.jap_alphanums = jap_alphanums
         # List of alphanumeric substrings extracted from English text
         self.eng_alphanums = eng_alphanums
-        # List of alphanumeric substrings missing from English text
+        # Counter objects of alphanumeric substrings missing from
+        # the English text
         self.missing_alphanums = missing_alphanums
-        # List of extra alphanumeric substrings found in English text
+        # Counter objects of extra alphanumeric substrings found in
+        # the English text
         self.extra_alphanums = extra_alphanums
         # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
@@ -74,7 +76,7 @@ def gather_segments():
         jap_text = node.getsource()
         eng_text = node.gettarget()
         segment = Segment(jap_text, eng_text, [], [], False, [], [],
-            False, False, [], False, [], [], [], [], [], False)
+            False, False, [], False, [], [], [], {}, {}, False)
         segments.append(segment)
 
     return segments

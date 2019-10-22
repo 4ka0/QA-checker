@@ -27,8 +27,31 @@ import output
 # Get the last argument (filename) from the command line.
 file = sys.argv[-1]
 
+'''
+Check input more thoroughly, use argparse?
+https://docs.python.org/dev/library/argparse.html
+    arg1 should be python3?
+    arg2 should be QA-checker.py
+    arg3 should be .tmx
+'''
+
+'''
+Include main()?
+https://realpython.com/python-main-function/
+'''
+
+
+# If no file has been specified on the command line.
+if file == 'QA-checker.py':
+    print('\nNO TRANSLATION FILE SPECIFIED.')
+    print('PLEASE SPECIFY A TMX FILE IN THE FOLLOWING WAY.')
+    print('python3 QA-checker.py file.tmx\n')
+
 # Only proceed if the provided file is a TMX file.
-if file.lower().endswith(".tmx"):
+elif file.lower().endswith('.tmx'):
+
+    # Check given file actually exists
+
 
     # Gather Japanese and English translation segments.
     segments = gather.gather_segments()
@@ -50,10 +73,16 @@ if file.lower().endswith(".tmx"):
     # Check for missing alphanumerical combinations (e.g. 符号 refnums)
     segments = alphanums.alphanum_check(segments)
 
+    # Check mathematical formulas match
+
+    # Check key vocab appears
+
     # Check for untranslated segments
 
     # output final results
-    # output.output_results(segments)
+    output.output_results(segments)
 
 else:
-    print("\nINCORRECT FILE TYPE. ONLY TMX FILES ACCEPTED.\n")
+    print('\nINCORRECT FILE TYPE. ONLY TMX FILES ARE ACCEPTED.')
+    print('PLEASE SPECIFY A TMX FILE IN THE FOLLOWING WAY.')
+    print('python3 QA-checker.py file.tmx\n')

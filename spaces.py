@@ -8,8 +8,8 @@ def double_space_check(segments):
     appears in an English segment.
     '''
 
-    double_space = "  "
-    exception = ".  " # Not treated as an error
+    double_space = '  '
+    exception = '.  ' # Not treated as an error
 
     for segment in segments:
         if (double_space in segment.eng_text and \
