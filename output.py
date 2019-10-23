@@ -15,13 +15,6 @@ def output_results(segments):
 
         if segment.error_found == True:
 
-            print('ERROR FOUND IN THE FOLLOWING SEGMENT.')
-            print('JAPANESE TEXT:')
-            print(segment.jap_text)
-            print('ENGLISH TEXT:')
-            print(segment.eng_text)
-            print('ERROR:')
-
             # Results for missing numbers
             if len(segment.missing_nums) > 0:
                 missing_nums_string = list_string(segment.missing_nums)
@@ -84,6 +77,10 @@ def output_results(segments):
                     print('EXTRA ALPHANUM FOUND: ' + alphanum_string)
                 errors_found_overall = True
 
+            print('JAPANESE TEXT:')
+            print(segment.jap_text)
+            print('ENGLISH TEXT:')
+            print(segment.eng_text)
             print('\n')
 
     if errors_found_overall == False:

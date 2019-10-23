@@ -73,8 +73,6 @@ elif file.lower().endswith('.tmx'):
     # Check for missing alphanumerical combinations (e.g. 符号 refnums)
     segments = alphanums.alphanum_check(segments)
 
-    # Check mathematical formulas match
-
     # Check key vocab appears
 
     # Check for untranslated segments

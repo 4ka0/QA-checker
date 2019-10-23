@@ -13,7 +13,8 @@ def alphanum_check(segments):
     '''
 
     # Extract alphanumeric combinations from Japanese and English text
-    segments = collect_alphanums(segments)
+    segments = collect_Jap_alphanums(segments)
+    segments = collect_Eng_alphanums(segments)
 
     # Look for missing and extra alphanums
     for segment in segments:
@@ -32,49 +33,62 @@ def alphanum_check(segments):
         if segment.extra_alphanums:
             segment.error_found = True
 
-        '''
-        if segment.missing_alphanums or segment.extra_alphanums:
-            print('\n')
-            print(segment.jap_text)
-            print(segment.eng_text)
-            print('jap_alphanums')
-            print(segment.jap_alphanums)
-            print('eng_alphanums')
-            print(segment.eng_alphanums)
-            print('missing:')
-            print(segment.missing_alphanums)
-            print('extra:')
-            print(segment.extra_alphanums)
-        '''
-
     return segments
 
 
-def collect_alphanums(segments):
+def collect_Jap_alphanums(segments):
     '''
     Function for extracting alphanumeric combinations from
-    Japanese and English text.
+    Japanese text.
     '''
 
-    ordinals = ['1st', '2nd', '3rd', '4th', '5th',
-                '6th', '7th', '8th', '9th']
+    # Mathematical characters to be ignored
+    math_symbols = ['+', '-', '/', 'x', '*', '=', '<', '>', '≦', '≧',
+                    '≤', '≥', '.']
+
+    # Units to be ignored
+    units = ['km', 'm', 'cm', 'mm', 'nm', 'mg', 'ml', 'kw', 'kwh',
+                'kg', 'kl', 'km', 'µg', 'µm', 'mm2', 'm2', 'cm2'
+                'mm3', 'm3', 'cm3', 'kb', 'gb', 'mb', 'pm', 'ns'
+                'ms', 'mw', 'mwh', 'gw', 'gwh']
 
     for segment in segments:
-
-        # Look at Japanese text
         jap_text = clean_string(segment.jap_text)
         jap_text = strip_Japanese(jap_text)
         jap_words = jap_text.split()
         for word in jap_words:
             if alphanum_identify(word) == True:
-                segment.jap_alphanums.append(word)
+                # Ignore alphanum combinations that are ordinals
+                if not any(char in word for char in math_symbols):
+                    # Ignore measurement units
+                    includes_unit = False
+                    for unit in units:
+                        if word.endswith(unit):
+                            includes_unit = True
+                    if not includes_unit:
+                        segment.jap_alphanums.append(word)
 
-        # Look at English text
+    return segments
+
+
+def collect_Eng_alphanums(segments):
+    '''
+    Function for extracting alphanumeric combinations from
+    English text.
+    '''
+
+    # Alphanums to be ignored
+    ordinals = ['1st', '2nd', '3rd', '4th', '5th',
+                '6th', '7th', '8th', '9th', '10th',
+                '11th', '12th', '13th', '14th', '15th',
+                '16th', '17th', '18th', '19th', '20th']
+
+    for segment in segments:
         eng_text = clean_string(segment.eng_text)
         eng_words = eng_text.split()
         for word in eng_words:
             if alphanum_identify(word) == True:
-                # Ignore alphanum combinations such as '1st' and '2nd'
+                # Ignore ordinals
                 if word not in ordinals:
                     segment.eng_alphanums.append(word)
 
@@ -102,12 +116,13 @@ def alphanum_identify(substring):
 def strip_Japanese(jap_text):
     '''
     Function for removing Japanese characters from a string.
+    Required as Japanese typically contains no whitespace.
     Based on jp_regex.py, see:
     https://github.com/olsgaard/Japanese_nlp_scripts/
         blob/master/jp_regex.py
     Copyright (c) 2014-2015, Mads Sørensen Ølsgaard
     All rights reserved. Released under BSD3 License.
-    Regular expression unicode blocks, collected from:
+    Regular expression unicode blocks collected from:
     http://www.localizingjapan.com/blog/2012/01/20/
         regular-expressions-for-japanese-text/
     '''
