@@ -20,8 +20,8 @@ class Segment():
     def __init__(self, jap_text, eng_text, jap_nums, eng_nums,
         error_found, missing_nums, extra_nums, double_space_found,
         repeated_word_found, repeated_words, unpaired_symbol_found,
-        unpaired_symbols, jap_alphanums, eng_alphanums,
-        missing_alphanums, extra_alphanums, untranslated_seg):
+        unpaired_symbols, jap_refnums, eng_refnums,
+        missing_refnums, extra_refnums, untranslated_seg):
         # String, Japanese text
         self.jap_text = jap_text
         # String, English text
@@ -46,16 +46,16 @@ class Segment():
         self.unpaired_symbol_found = unpaired_symbol_found
         # List of missing paired symbols if any found
         self.unpaired_symbols = unpaired_symbols
-        # List of alphanumeric substrings extracted from Japanese text
-        self.jap_alphanums = jap_alphanums
-        # List of alphanumeric substrings extracted from English text
-        self.eng_alphanums = eng_alphanums
-        # Counter objects of alphanumeric substrings missing from
+        # List of reference numbers extracted from Japanese text
+        self.jap_refnums = jap_refnums
+        # List of reference numbers extracted from English text
+        self.eng_refnums = eng_refnums
+        # Counter objects of reference numbers missing from
         # the English text
-        self.missing_alphanums = missing_alphanums
-        # Counter objects of extra alphanumeric substrings found in
+        self.missing_refnums = missing_refnums
+        # Counter objects of extra reference numbers found in
         # the English text
-        self.extra_alphanums = extra_alphanums
+        self.extra_refnums = extra_refnums
         # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
 

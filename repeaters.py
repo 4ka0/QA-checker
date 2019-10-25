@@ -67,11 +67,3 @@ def double_word_check(segments):
                 i += 1
 
     return segments
-
-
-'''
-Function for removing punctuation chars etc. from a string (normalizing).
-'''
-def clean_string(text):
-    clean_text = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', '', text)
-    return clean_text
