@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 '''
-Translate-toolkit used to parse TMX file.
+Translate-toolkit used to parse tmx file.
 http://docs.translatehouse.org/projects/translate-toolkit/en/
     latest/api/storage.html#module-translate.storage.tmx
 '''
 
 import sys
+from colorama import Fore
 from translate.storage.tmx import tmxfile
 
 
@@ -62,21 +63,25 @@ class Segment():
 
 def gather_segments():
     '''
-    Function for gathering translations segments from a TMX file.
+    Function for gathering translations segments from a tmx file.
     '''
 
-    file = sys.argv[-1] # Gets last command line argument (filename)
-    with open(file, 'rb') as f:
-        tmx_file = tmxfile(f)
+    file = sys.argv[1]
 
-    segments = [] # List of Segment objects
-
-    # Iterates over TMX file and extracts text from segments.
-    for node in tmx_file.unit_iter():
-        jap_text = node.getsource()
-        eng_text = node.gettarget()
-        segment = Segment(jap_text, eng_text, [], [], False, [], [],
-            False, False, [], False, [], [], [], {}, {}, False)
-        segments.append(segment)
+    try:
+        with open(file, 'rb') as f:
+            tmx_file = tmxfile(f)
+    except:
+        print(Fore.RED+'\"'+file+'\"'+' not found.')
+        print(Fore.RED+'Please check the location of your tmx file.')
+        quit()
+    else:
+        segments = [] # Used as list of Segment objects
+        for node in tmx_file.unit_iter():
+            jap_text = node.getsource()
+            eng_text = node.gettarget()
+            segment = Segment(jap_text, eng_text, [], [], False, [], [],
+                False, False, [], False, [], [], [], {}, {}, False)
+            segments.append(segment)
 
     return segments
