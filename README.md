@@ -8,8 +8,8 @@ Targets the following issues:
   - Double spaces
   - Untranslated segments
 
-Takes three arguments to execute from the command line:
-  python3 QA-checker.py yourfile.tmx
+Run from the command line with the following:
+`python3 QA-checker.py yourfile.tmx`
 
 Results sent to stdout.
 
