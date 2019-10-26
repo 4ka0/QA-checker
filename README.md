@@ -9,6 +9,7 @@ Targets the following issues:
   - Untranslated segments
 
 Run from the command line with the following:
+
 `python3 QA-checker.py yourfile.tmx`
 
 Results sent to stdout.
