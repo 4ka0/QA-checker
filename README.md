@@ -8,11 +8,11 @@ Targets the following issues:
   - Double spaces
   - Untranslated segments
 
-Run from the command line with the following:
+Run from the command line with the following (results sent to stdout):
 
 `python3 QA-checker.py yourfile.tmx`
 
-Results sent to stdout.
+
 
 Note:
 This program has been designed for and tested with only Jap>Eng translations of patent texts, namely my own translation work.
