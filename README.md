@@ -1,4 +1,4 @@
-Lightweight program for performing various QA checks on a TMX file.
+Lightweight program for performing various QA checks on a tmx (translation memory exchange) file.
 
 Targets the following issues:
   - Inconsistent numbers between source and target segments (i.e. missing or extra numbers in the target segment)
@@ -14,4 +14,4 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 
 Note:
-This program has been designed for and tested on only Jap > Eng translations of patent texts, namely my own translation work.
+This program has been designed for and tested with only Jap>Eng translations of patent texts, namely my own translation work.
