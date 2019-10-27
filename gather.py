@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-'''
-Translate-toolkit used to parse tmx file.
-http://docs.translatehouse.org/projects/translate-toolkit/en/
-    latest/api/storage.html#module-translate.storage.tmx
-'''
-
 import sys
 from colorama import Fore
 from translate.storage.tmx import tmxfile
@@ -64,6 +58,9 @@ class Segment():
 def gather_segments():
     '''
     Function for gathering translations segments from a tmx file.
+    Translate-toolkit used to parse tmx file.
+    http://docs.translatehouse.org/projects/translate-toolkit/en/
+        latest/api/storage.html#module-translate.storage.tmx
     '''
 
     file = sys.argv[1]

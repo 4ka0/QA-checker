@@ -9,7 +9,7 @@ def output_results(segments):
     Function for outputting QA check results.
     '''
 
-    print(Fore.CYAN + '\n****************\nRESULTS:\n')
+    print(Fore.CYAN + '\nRESULTS:\n')
 
     errors_found_overall = False
 

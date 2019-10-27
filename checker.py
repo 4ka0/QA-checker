@@ -54,8 +54,10 @@ if verify_input.user_input_check():
     segments = refnums.refnum_check(segments)
 
     # Check for untranslated segments
-    # Empty or containing only whitespace or no letters
-    # Too short to be complete translation, compare char count of source and word count of target?
+        # Empty segs
+        # Segs containing only whitespace etc.
+        # Segs that are too short to be complete translation,
+            # compare char count of source and word count of target?
 
     # Check source/target segment inconsistencies
 
