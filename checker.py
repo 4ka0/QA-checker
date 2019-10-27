@@ -14,8 +14,7 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 '''
 
-import sys
-import verify_input
+import verify
 import gather
 import numbers
 import spaces
@@ -31,7 +30,7 @@ https://realpython.com/python-main-function/
 '''
 
 # Only proceeds if True is returned
-if verify_input.user_input_check():
+if verify.user_input_check():
 
     # Gather Japanese and English translation segments.
     segments = gather.gather_segments()

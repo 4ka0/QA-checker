@@ -29,7 +29,7 @@ def user_input_check():
             input_verified = False
             print(Fore.RED + 'Incorrect file type. Only tmx files accepted.')
 
-    if input_verified == False:
+    if not input_verified:
         print(Fore.RED + 'Please try again using the following format.')
         print(Fore.CYAN + 'python3 checker.py yourfile.tmx')
 

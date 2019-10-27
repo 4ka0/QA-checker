@@ -57,11 +57,11 @@ def missing_number_check(segments):
     return segments
 
 
-'''
-Function for checking if extra numbers are included the English segment.
-Essentially the same logic as above.
-'''
 def extra_number_check(segments):
+    '''
+    Function for checking if extra numbers are included the English segment.
+    Essentially the same logic as above.
+    '''
 
     segments = extract_numbers(segments)
 

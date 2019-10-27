@@ -46,16 +46,16 @@ def collect_Jap_refnums(segments):
 
     # Units to be ignored
     units = ['km', 'm', 'cm', 'mm', 'nm', 'mg', 'ml', 'kw', 'kwh',
-                'kg', 'kl', 'km', 'µg', 'µm', 'mm2', 'm2', 'cm2'
-                'mm3', 'm3', 'cm3', 'kb', 'gb', 'mb', 'pm', 'ns'
-                'ms', 'mw', 'mwh', 'gw', 'gwh']
+             'kg', 'kl', 'km', 'µg', 'µm', 'mm2', 'm2', 'cm2'
+             'mm3', 'm3', 'cm3', 'kb', 'gb', 'mb', 'pm', 'ns'
+             'ms', 'mw', 'mwh', 'gw', 'gwh']
 
     for segment in segments:
         jap_text = clean_string(segment.jap_text)
         jap_text = strip_Japanese(jap_text)
         jap_words = jap_text.split()
         for word in jap_words:
-            if refnum_identify(word) == True:
+            if refnum_identify(word):
                 # Ignore reference numbers that include math symbols
                 if not any(char in word for char in math_symbols):
                     # Ignore digits combined with measurement units
@@ -84,7 +84,7 @@ def collect_Eng_refnums(segments):
         eng_text = clean_string(segment.eng_text)
         eng_words = eng_text.split()
         for word in eng_words:
-            if refnum_identify(word) == True:
+            if refnum_identify(word):
                 if word not in ordinals:
                     segment.eng_refnums.append(word)
 

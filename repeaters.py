@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-import re
-
-
 def single_word_check(segments):
     '''
     Function for checking to see if there are any single
@@ -26,19 +23,19 @@ def single_word_check(segments):
                     segment.error_found = True
                     segment.repeated_word_found = True
                     segment.repeated_words.append(previous_substring +
-                        ' ' + current_string)
+                                                  ' ' + current_string)
 
                 previous_substring = current_string
 
     return segments
 
 
-'''
-Function for checking to see if there are any repeating two-word
-combinations in the English text. Common examples include
-'of the of the' and 'will be will be'.
-'''
 def double_word_check(segments):
+    '''
+    Function for checking to see if there are any repeating two-word
+    combinations in the English text. Common examples include
+    'of the of the' and 'will be will be'.
+    '''
 
     for segment in segments:
 
@@ -62,7 +59,7 @@ def double_word_check(segments):
                     segment.error_found = True
                     segment.repeated_word_found = True
                     segment.repeated_words.append(substring_A + ' '
-                        + substring_B)
+                                                  + substring_B)
 
                 i += 1
 

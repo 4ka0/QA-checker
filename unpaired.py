@@ -8,7 +8,7 @@ def unpaired_symbol_check(segments):
     square brackets, braces, and double quotation marks.
     '''
 
-    symbol_pairs = {'(':')', '[':']', '{':'}'}
+    symbol_pairs = {'(': ')', '[': ']', '{': '}'}
 
     '''
     Dict containing number of instances of each symbol
