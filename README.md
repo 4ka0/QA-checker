@@ -8,8 +8,5 @@ Targets the following issues:
   - Consistency between numbers in source and target segments (i.e. missing or extra numbers in the target segment)
   - Consistency between component reference numbers (alphanumerical combinations such as "100a" and "240B", which often appear in patent texts after components)
 
-Takes three arguments to execute from the command line:
-
-'python3 QA-checker.py yourfile.tmx'
-
-Results sent to stdout.
+Run from the command line with the following (results sent to stdout):
+`python3 QA-checker.py yourfile.tmx`
