@@ -9,4 +9,5 @@ Targets the following issues:
   - Consistency between component reference numbers (alphanumerical combinations such as "100a" and "240B", which often appear in patent texts after components)
 
 Run from the command line with the following (results sent to stdout):
+
 `python3 QA-checker.py yourfile.tmx`
