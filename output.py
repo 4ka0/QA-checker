@@ -15,60 +15,71 @@ def output_results(segments):
 
     for segment in segments:
 
-        if segment.error_found == True:
+        if segment.error_found:
 
             # Results for missing numbers
             if len(segment.missing_nums) > 0:
                 missing_nums_string = list_string(segment.missing_nums)
                 if len(segment.missing_nums) > 1:
-                    print(Fore.RED + 'Missing numbers found: ' + missing_nums_string)
+                    print(Fore.RED + 'Missing numbers found: ' +
+                          missing_nums_string)
                 else:
-                    print(Fore.RED + 'Missing number found: ' + missing_nums_string)
+                    print(Fore.RED + 'Missing number found: ' +
+                          missing_nums_string)
                 errors_found_overall = True
 
             # Results for extra numbers
             if len(segment.extra_nums) > 0:
                 extra_nums_string = list_string(segment.extra_nums)
                 if len(segment.extra_nums) > 1:
-                    print(Fore.RED + 'Extra numbers found: ' + extra_nums_string)
+                    print(Fore.RED + 'Extra numbers found: ' +
+                          extra_nums_string)
                 else:
-                    print(Fore.RED + 'Extra number found: ' + extra_nums_string)
+                    print(Fore.RED + 'Extra number found: ' +
+                          extra_nums_string)
                 errors_found_overall = True
 
             # Results for double-spaces
-            if segment.double_space_found == True:
+            if segment.double_space_found:
                 print(Fore.RED + 'Double-space found.')
                 errors_found_overall = True
 
             # Results for repeated words
-            if segment.repeated_word_found == True:
+            if segment.repeated_word_found:
                 repeated_word_string = list_string(segment.repeated_words)
-                print(Fore.RED + 'Repeated words found: ' + repeated_word_string)
+                print(Fore.RED + 'Repeated words found: ' +
+                      repeated_word_string)
                 errors_found_overall = True
 
             # Results for unpaired symbols
-            if segment.unpaired_symbol_found == True:
+            if segment.unpaired_symbol_found:
                 unpaired_symbol_string = list_string(segment.unpaired_symbols)
                 if len(segment.unpaired_symbols) > 1:
-                    print(Fore.RED + 'Unpaired symbols found: ' + unpaired_symbol_string)
+                    print(Fore.RED + 'Unpaired symbols found: ' +
+                          unpaired_symbol_string)
                 else:
-                    print(Fore.RED + 'Unpaired symbol found: ' + unpaired_symbol_string)
+                    print(Fore.RED + 'Unpaired symbol found: ' +
+                          unpaired_symbol_string)
                 errors_found_overall = True
 
             # Results for missing aplhanums
             if len(segment.missing_refnums) > 0:
                 refnum_string = dict_string(segment.missing_refnums)
                 if ',' in refnum_string:
-                    print(Fore.RED + 'Missing reference numbers found: ' + refnum_string)
+                    print(
+                        Fore.RED + 'Missing reference numbers found: ' +
+                        refnum_string)
                 else:
-                    print(Fore.RED + 'Missing reference number found: ' + refnum_string)
+                    print(Fore.RED + 'Missing reference number found: ' +
+                          refnum_string)
                 errors_found_overall = True
 
             # Results for extra aplhanums
             if len(segment.extra_refnums) > 0:
                 refnum_string = dict_string(segment.extra_refnums)
                 if ',' in refnum_string:
-                    print(Fore.RED + 'Extra reference numbers found: ' + refnum_string)
+                    print(Fore.RED + 'Extra reference numbers found: ' +
+                          refnum_string)
                 else:
                     print('Extra reference number found: ' + refnum_string)
                 errors_found_overall = True
@@ -79,7 +90,7 @@ def output_results(segments):
             print(Fore.RESET + segment.eng_text)
             print('\n')
 
-    if errors_found_overall == False:
+    if not errors_found_overall:
         print(Fore.GREEN + '\nNo errors found.\n')
 
 

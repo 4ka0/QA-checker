@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from colorama import Fore
 from translate.storage.tmx import tmxfile
 
 
@@ -13,10 +12,11 @@ class Segment():
     '''
 
     def __init__(self, jap_text, eng_text, jap_nums, eng_nums,
-        error_found, missing_nums, extra_nums, double_space_found,
-        repeated_word_found, repeated_words, unpaired_symbol_found,
-        unpaired_symbols, jap_refnums, eng_refnums,
-        missing_refnums, extra_refnums, untranslated_seg):
+                 error_found, missing_nums, extra_nums,
+                 double_space_found, repeated_word_found,
+                 repeated_words, unpaired_symbol_found,
+                 unpaired_symbols, jap_refnums, eng_refnums,
+                 missing_refnums, extra_refnums, untranslated_seg):
         # String, Japanese text
         self.jap_text = jap_text
         # String, English text
@@ -68,17 +68,16 @@ def gather_segments():
     try:
         with open(file, 'rb') as f:
             tmx_file = tmxfile(f)
-    except:
-        print(Fore.RED+'\"'+file+'\"'+' not found.')
-        print(Fore.RED+'Please check the location of your tmx file.')
-        quit()
+    except OSError as error:
+        raise error
     else:
-        segments = [] # Used as list of Segment objects
+        segments = []  # Used as list of Segment objects
         for node in tmx_file.unit_iter():
             jap_text = node.getsource()
             eng_text = node.gettarget()
             segment = Segment(jap_text, eng_text, [], [], False, [], [],
-                False, False, [], False, [], [], [], {}, {}, False)
+                              False, False, [], False, [], [], [], {},
+                              {}, False)
             segments.append(segment)
 
     return segments

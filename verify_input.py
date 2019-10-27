@@ -6,7 +6,7 @@ from colorama import init
 from colorama import Fore
 
 
-init() # From colorama, used to activate colored output on Windows OS
+init()  # From colorama, used to activate colored output on Windows OS
 
 
 def user_input_check():
