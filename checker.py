@@ -66,10 +66,20 @@ if verify.user_input_check():
 
     # Check starting capitalization
 
+    # Check numbered elements? Use MeCab to help identify these?
+    '''
+    There was a word macro based check tool made by Canon that
+    I used to use at Chizai. It would somehow recognize all the
+    numbered elements in a document and extract them and it would
+    make it very easy to check whether you’d accidentally used
+    slightly different names for the same element.
+    '''
+
     # Check for mathematical expressions
     '''
     https://stackoverflow.com/questions/51439794/get-mathematical-expressions-single-letters-numbers-equations-using-regex
-    Look at Japanese text for substrings given in the "units to be ignored" list in refnums.
+    Look at Japanese text for substrings given in
+    the "units to be ignored" list in refnums.
     '''
 
     # Check key vocab appears

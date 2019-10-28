@@ -40,31 +40,29 @@ def collect_Jap_refnums(segments):
     Function for extracting reference numbers from Japanese text.
     '''
 
-    # Mathematical characters to be ignored
-    math_symbols = ['+', '-', '/', 'x', '*', '=', '<', '>', '≦', '≧',
-                    '≤', '≥', '.']
-
     # Units to be ignored
     units = ['km', 'm', 'cm', 'mm', 'nm', 'mg', 'ml', 'kw', 'kwh',
-             'kg', 'kl', 'km', 'µg', 'µm', 'mm2', 'm2', 'cm2'
-             'mm3', 'm3', 'cm3', 'kb', 'gb', 'mb', 'pm', 'ns'
+             'kg', 'kl', 'km', 'µg', 'µm', 'mm2', 'm2', 'cm2',
+             'mm3', 'm3', 'cm3', 'kb', 'gb', 'mb', 'pm', 'ns',
              'ms', 'mw', 'mwh', 'gw', 'gwh']
 
+    # Break Japanese text down into substrings
     for segment in segments:
-        jap_text = clean_string(segment.jap_text)
-        jap_text = strip_Japanese(jap_text)
-        jap_words = jap_text.split()
-        for word in jap_words:
-            if refnum_identify(word):
-                # Ignore reference numbers that include math symbols
-                if not any(char in word for char in math_symbols):
-                    # Ignore digits combined with measurement units
-                    includes_unit = False
-                    for unit in units:
-                        if word.endswith(unit):
-                            includes_unit = True
-                    if not includes_unit:
-                        segment.jap_refnums.append(word)
+        jap_text = strip_Japanese_chars(segment.jap_text)
+        jap_text = clean_string(jap_text)
+        jap_subs = jap_text.split()
+
+        # Extract reference numbers from substrings
+        for sub in jap_subs:
+            # If contains at least one alphabet letter and at least one number
+            if refnum_identify(sub):
+                # Ignore digits followed by measurement units
+                includes_unit = False
+                for unit in units:
+                    if sub.endswith(unit):
+                        includes_unit = True
+                if not includes_unit:
+                    segment.jap_refnums.append(sub)
 
     return segments
 
@@ -109,7 +107,7 @@ def refnum_identify(substring):
         return False
 
 
-def strip_Japanese(jap_text):
+def strip_Japanese_chars(jap_text):
     '''
     Function for removing Japanese characters from a string.
     Japanese typically contains no whitespace as word delimiters,
@@ -117,8 +115,7 @@ def strip_Japanese(jap_text):
     Japanese characters have to be removed first.
 
     Based on jp_regex.py.
-    https://github.com/olsgaard/Japanese_nlp_scripts/
-        blob/master/jp_regex.py
+    https://github.com/olsgaard/Japanese_nlp_scripts/blob/master/jp_regex.py
     Copyright (c) 2014-2015, Mads Sørensen Ølsgaard
     All rights reserved. Released under BSD3 License.
 
@@ -137,7 +134,7 @@ def strip_Japanese(jap_text):
     symbols_punct = r'[、-〿]'
     misc_symbols = r'[ㇰ-ㇿ㈠-㉃㊀-㋾㌀-㍿]'
 
-    # Strip Japanese segment of characters included in above blocks
+    # Strip Japanese segment of characters included in the above blocks
     jap_text = re.sub(kanji, ' ', jap_text)
     jap_text = re.sub(hiragana_full_width, ' ', jap_text)
     jap_text = re.sub(katakana_full_width, ' ', jap_text)
@@ -152,7 +149,11 @@ def strip_Japanese(jap_text):
 
 def clean_string(text):
     '''
-    Function for removing punctuation chars etc. from a string.
+    Function for removing punctuation and math symbols and so on
+    from a string.
     '''
-    clean_text = re.sub('[,.;:/?*"+=!_@#$<>()\[\]]', ' ', text)
+    symbols = r'[,.;:?!"_@#$£%^&+-/x*=<>≤≥≦≧()\[\]{}\\]'
+
+    clean_text = re.sub(symbols, ' ', text)
+
     return clean_text

@@ -81,7 +81,8 @@ def output_results(segments):
                     print(Fore.RED + 'Extra reference numbers found: ' +
                           refnum_string)
                 else:
-                    print('Extra reference number found: ' + refnum_string)
+                    print(Fore.RED + 'Extra reference number found: ' +
+                          refnum_string)
                 errors_found_overall = True
 
             print(Fore.CYAN + 'Japanese:')
