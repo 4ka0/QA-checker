@@ -72,7 +72,7 @@ def collect_Eng_refnums(segments):
     Function for extracting reference numbers from English text.
     '''
 
-    # Ordinals to be ignored
+    # Ordinals are to be ignored
     ordinals = ['1st', '2nd', '3rd', '4th', '5th',
                 '6th', '7th', '8th', '9th', '10th',
                 '11th', '12th', '13th', '14th', '15th',
@@ -90,6 +90,9 @@ def collect_Eng_refnums(segments):
 
 
 def refnum_identify(substring):
+    '''
+    BUG - some reference numbers don't include digits, such as 'BP'
+    '''
     '''
     Function for identifying substrings that contain at least one letter
     and at least one number. These are treated as reference numbers.
@@ -120,19 +123,18 @@ def strip_Japanese_chars(jap_text):
     All rights reserved. Released under BSD3 License.
 
     Regular expression unicode blocks collected from:
-    http://www.localizingjapan.com/blog/2012/01/20/
-        regular-expressions-for-japanese-text/
+    http://www.localizingjapan.com/blog/2012/01/20/regular-expressions-for-japanese-text/
     '''
 
     # Regular expression unicode blocks
-    hiragana_full_width = r'[ぁ-ゟ]'
-    katakana_full_width = r'[゠-ヿ]'
-    katakana_half_width = r'[｟-ﾟ]'
-    kanji = r'[㐀-䶵一-鿋豈-頻]'
-    radicals = r'[⺀-⿕]'
-    alphanum_full_width = r'[！-～]'
-    symbols_punct = r'[、-〿]'
-    misc_symbols = r'[ㇰ-ㇿ㈠-㉃㊀-㋾㌀-㍿]'
+    hiragana_full_width = r'[\u3040-\u309F]'
+    katakana_full_width = r'[\u30A0-\u30FF]'
+    katakana_half_width = r'[\uFF5F-\uFF9F]'
+    kanji = r'[\u3400-\u4DB5\u4E00-\u9FCB\uF900-\uFA6A]'
+    radicals = r'[\u2E80-\u2FD5]'
+    alphanum_full_width = r'[\uFF01-\uFF5E]'
+    symbols_punct = r'[\u3000-\u303F]'
+    misc_symbols = r'[\u31F0-\u31FF\u3220-\u3243\u3280-\u337F]'
 
     # Strip Japanese segment of characters included in the above blocks
     jap_text = re.sub(kanji, ' ', jap_text)
@@ -149,8 +151,7 @@ def strip_Japanese_chars(jap_text):
 
 def clean_string(text):
     '''
-    Function for removing punctuation and math symbols and so on
-    from a string.
+    Function for removing punctuation, math symbols, etc. from a string.
     '''
     symbols = r'[,.;:?!"_@#$£%^&+-/x*=<>≤≥≦≧()\[\]{}\\]'
 
