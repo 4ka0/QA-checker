@@ -9,16 +9,9 @@ def untranslated_check(segments):
         - the English text is empty
         - the English text contains only whitespace
     '''
-
-    return segments
-
-
-def partially_translated_check(segments):
-    '''
-    Function for checking for partially translated segments.
-    Segments treated as partially translated if:
-        - the English text is shorter than the Japanese text
-          i.e. the Eng wordcount is less than half of the Jap character count
-    '''
-
+    for segment in segments:
+        if not segment.eng_text:
+            segment.untranslated_seg = True
+        if segment.eng_text.isspace():
+            segment.untranslated_seg = True
     return segments

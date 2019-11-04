@@ -17,6 +17,11 @@ def output_results(segments):
 
         if segment.error_found:
 
+            # Results for untranslated segments
+            if segment.untranslated_seg:
+                print(Fore.RED + 'Untranslated segment found.')
+                errors_found_overall = True
+
             # Results for missing numbers
             if len(segment.missing_nums) > 0:
                 missing_nums_string = list_string(segment.missing_nums)
@@ -39,9 +44,24 @@ def output_results(segments):
                           extra_nums_string)
                 errors_found_overall = True
 
-            # Results for double-spaces
-            if segment.double_space_found:
-                print(Fore.RED + 'Double-space found.')
+            # Results for consecutive spaces
+            if segment.consecutive_space_found:
+                print(Fore.RED + 'Consecutive spaces found.')
+                errors_found_overall = True
+
+            # Results for leading spaces
+            if segment.leading_space_found:
+                print(Fore.RED + 'Leading space found.')
+                errors_found_overall = True
+
+            # Results for trailing spaces
+            if segment.trailing_space_found:
+                print(Fore.RED + 'Trailing space found.')
+                errors_found_overall = True
+
+            # Results for leading capitalization
+            if segment.capitalization_error_found:
+                print(Fore.RED + 'Leading word not capitalized.')
                 errors_found_overall = True
 
             # Results for repeated words

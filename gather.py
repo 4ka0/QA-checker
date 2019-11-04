@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from colorama import Fore
 from translate.storage.tmx import tmxfile
 
 
@@ -13,7 +14,9 @@ class Segment():
 
     def __init__(self, jap_text, eng_text, jap_nums, eng_nums,
                  error_found, missing_nums, extra_nums,
-                 double_space_found, repeated_word_found,
+                 consecutive_space_found, leading_space_found,
+                 trailing_space_found, capitalization_error_found,
+                 trailing_punctuation_error, repeated_word_found,
                  repeated_words, unpaired_symbol_found,
                  unpaired_symbols, jap_refnums, eng_refnums,
                  missing_refnums, extra_refnums, untranslated_seg):
@@ -31,8 +34,16 @@ class Segment():
         self.missing_nums = missing_nums
         # List of ints, extra numbers found in English text
         self.extra_nums = extra_nums
-        # Boolean, True if double spaces found
-        self.double_space_found = double_space_found
+        # Boolean, True if consecutive spaces found
+        self.consecutive_space_found = consecutive_space_found
+        # Boolean, True if leading space found
+        self.leading_space_found = leading_space_found
+        # Boolean, True if trailing space found
+        self.trailing_space_found = trailing_space_found
+        # Boolean, True if first word in target text is not capitalized
+        self.capitalization_error_found = capitalization_error_found
+        # Boolean, True if first word in target text is not capitalized
+        self.trailing_punctuation_error = trailing_punctuation_error
         # Boolean, True if repeated words found
         self.repeated_word_found = repeated_word_found
         # List of strings, repeated words if any found
@@ -59,8 +70,7 @@ def gather_segments():
     '''
     Function for gathering translations segments from a tmx file.
     Translate-toolkit used to parse tmx file.
-    http://docs.translatehouse.org/projects/translate-toolkit/en/
-        latest/api/storage.html#module-translate.storage.tmx
+    http://docs.translatehouse.org/projects/translate-toolkit/en/latest/api/storage.html#module-translate.storage.tmx
     '''
 
     file = sys.argv[1]
@@ -68,16 +78,17 @@ def gather_segments():
     try:
         with open(file, 'rb') as f:
             tmx_file = tmxfile(f)
-    except OSError as error:
-        raise error
+    except:
+        print(Fore.RED + 'File not found.')
+        quit()
     else:
         segments = []  # Used as list of Segment objects
         for node in tmx_file.unit_iter():
             jap_text = node.getsource()
             eng_text = node.gettarget()
             segment = Segment(jap_text, eng_text, [], [], False, [], [],
-                              False, False, [], False, [], [], [], {},
-                              {}, False)
+                              False, False, False, False, False, False,
+                              [], False, [], [], [], {}, {}, False)
             segments.append(segment)
 
     return segments

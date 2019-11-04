@@ -20,6 +20,8 @@ import numbers
 import spaces
 import repeaters
 import unpaired
+import capitals
+import punctuation
 import refnums
 import untranslated
 import output
@@ -32,26 +34,19 @@ if __name__ == "__main__":
         # Gather Japanese and English translation segments.
         segments = gather.gather_segments()
 
-        # Check for untranslated and partially translated segments
+        # Run checks
         segments = untranslated.untranslated_check(segments)
-        segments = untranslated.partially_translated_check(segments)
-
-        # Check for missing/extra numbers appearing as numbers
         segments = numbers.missing_number_check(segments)
         segments = numbers.extra_number_check(segments)
-
-        # Check for double spaces
-        segments = spaces.double_space_check(segments)
-
-        # Check for repeated words
+        segments = spaces.consecutive_space_check(segments)
+        segments = spaces.leading_space_check(segments)
+        segments = spaces.trailing_space_check(segments)
         segments = repeaters.single_word_check(segments)
         segments = repeaters.double_word_check(segments)
-
-        # Check for unpaired symbols such as parentheses
         segments = unpaired.unpaired_symbol_check(segments)
+        segments = capitals.leading_capital_check(segments)
+        segments = punctuation.ending_punctuation_check(segments)
+        # segments = refnums.refnum_check(segments)
 
-        # Check for missing reference numbers
-        segments = refnums.refnum_check(segments)
-
-        # output final results
+        # Output final results
         output.output_results(segments)
