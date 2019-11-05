@@ -71,6 +71,11 @@ def output_results(segments):
                       repeated_word_string)
                 errors_found_overall = True
 
+            # Results for trailing punctuation
+            if segment.trailing_punctuation_error:
+                print(Fore.RED + 'Trailing punctuation does not match.')
+                errors_found_overall = True
+
             # Results for unpaired symbols
             if segment.unpaired_symbol_found:
                 unpaired_symbol_string = list_string(segment.unpaired_symbols)
