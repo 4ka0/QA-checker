@@ -19,7 +19,8 @@ class Segment():
                  trailing_punctuation_error, repeated_word_found,
                  repeated_words, unpaired_symbol_found,
                  unpaired_symbols, jap_refnums, eng_refnums,
-                 missing_refnums, extra_refnums, untranslated_seg):
+                 missing_refnums, extra_refnums, untranslated_seg,
+                 jap_char_found, jap_chars):
         # String, Japanese text
         self.jap_text = jap_text
         # String, English text
@@ -64,6 +65,10 @@ class Segment():
         self.extra_refnums = extra_refnums
         # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
+        # Boolean, True if Japanese character is found in the English text
+        self.jap_char_found = jap_char_found
+        # List of Japanese characters found in the English text
+        self.jap_chars = jap_chars
 
 
 def gather_segments():
@@ -88,7 +93,7 @@ def gather_segments():
             eng_text = node.gettarget()
             segment = Segment(jap_text, eng_text, [], [], False, [], [],
                               False, False, False, False, False, False,
-                              [], False, [], [], [], {}, {}, False)
+                              [], False, [], [], [], {}, {}, False, False, [])
             segments.append(segment)
 
     return segments

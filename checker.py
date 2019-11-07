@@ -14,16 +14,18 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 '''
 
+
 import verify
 import gather
+import untranslated
 import numbers
 import spaces
 import repeaters
 import unpaired
 import capitals
 import punctuation
+import characters
 import refnums
-import untranslated
 import output
 
 
@@ -46,7 +48,8 @@ if __name__ == "__main__":
         segments = unpaired.unpaired_symbol_check(segments)
         segments = capitals.leading_capital_check(segments)
         segments = punctuation.ending_punctuation_check(segments)
+        segments = characters.jap_character_check(segments)
         # segments = refnums.refnum_check(segments)
 
         # Output final results
-        output.output_results(segments)
+        # output.output_results(segments)

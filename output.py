@@ -76,6 +76,11 @@ def output_results(segments):
                 print(Fore.RED + 'Trailing punctuation does not match.')
                 errors_found_overall = True
 
+            # Results for Japanese character check
+            if segment.jap_char_found:
+                print(Fore.RED + 'Japanese/full-width character found.')
+                errors_found_overall = True
+
             # Results for unpaired symbols
             if segment.unpaired_symbol_found:
                 unpaired_symbol_string = list_string(segment.unpaired_symbols)
