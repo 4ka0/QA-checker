@@ -4,8 +4,8 @@
 
 def unpaired_symbol_check(segments):
     '''
-    Function for checking for unpaired symbols including parentheses,
-    square brackets, braces, and double quotation marks.
+    Function for checking for unpaired symbols including
+    parentheses, square brackets, braces, and double quotation marks.
     '''
 
     symbol_pairs = {'(': ')', '[': ']', '{': '}'}

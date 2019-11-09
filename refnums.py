@@ -165,7 +165,6 @@ def clean_string(text):
     Function for removing punctuation, math symbols, etc. from a string.
     '''
     symbols = r'[,.;:?!"_@#$£%^&+-/x*=<>≤≥≦≧()\[\]{}\\]'
-
     clean_text = re.sub(symbols, ' ', text)
 
     return clean_text

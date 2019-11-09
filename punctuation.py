@@ -41,53 +41,10 @@ def ending_punctuation_check(segments):
 
         if last_jap_char in jap_punc:
             last_eng_char = eng_text[-1]
-            # Compare trailing punctuation between Jap and Eng,
+            # Compare trailing punctuation between Jap and Eng;
             # these should correspond.
             corresponding_eng = corresponding_punc[last_jap_char]
             if last_eng_char != corresponding_eng:
                 segment.trailing_punctuation_error = True
 
     return segments
-
-
-'''
-REFERENCE - Japanese closing puntuation marks
-
-Commas (corresponding to English version ',' '\u002C')
-'\u3001'  # ideographic comma '、'
-'\u002C'  # basic latin comma ','
-'\uFF0C'  # fullwidth comma '，'
-'\uFF64'  # halfwidth ideographic comma '､'
-
-Periods (corresponding to English version '.' '\u002E')
-'\u3002'  # ideographic period '。' => '.'
-'\u002E'  # basic latin period '.'
-'\uFF0E'  # fullwidth period '．'
-'\uFF61'  # halfwidth ideographic period '｡'
-
-Parentheses (corresponding to English version ')' '\u0029')
-'\uFF09'  # right single parenthesis '）'
-'\uFF60'  # right double parenthesis '｠'
-
-Square brackets (corresponding to English version ']' '\u005D')
-'\uFF3D'  # right bracket '］'
-'\uFF5D'  # right curly bracket '｝'
-'\u3015'  # right tortoise shell bracket '〕'
-'\u3017'  # right white lenticular bracket '〗'
-'\u3011'  # right solid lenticular bracket '】'
-'\u3019'  # right white tortoise shell bracket '〙'
-'\u301B'  # right white square bracket '〛'
-
-Angle brackets (corresponding to English version '>' '\u003E')
-'\u3009'  # right angle bracket '〉'
-'\u300B'  # right double angle bracket '》'
-
-Corner Brackets (corresponding to English version '"' '\u0022')
-'\u300D'  # right corner bracket '」'
-'\u300F'  # right white corner bracket '』'
-
-Tildes (corresponding to English version '…' '\u2026')
-'\u301C'  # kara symbol '〜'
-'\uFF5E'  # fullwidth tilde '～'
-'\u2026'  # ellipsis '…'
-'''

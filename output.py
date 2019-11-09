@@ -65,30 +65,6 @@ def output_results(segments):
                           unpaired_symbol_string)
                 errors_found_overall = True
 
-            '''
-            # Results for missing numbers
-            if len(segment.missing_nums) > 0:
-                missing_nums_string = list_string(segment.missing_nums)
-                if len(segment.missing_nums) > 1:
-                    print(Fore.RED + 'Missing numbers found: ' +
-                          missing_nums_string)
-                else:
-                    print(Fore.RED + 'Missing number found: ' +
-                          missing_nums_string)
-                errors_found_overall = True
-
-            # Results for extra numbers
-            if len(segment.extra_nums) > 0:
-                extra_nums_string = list_string(segment.extra_nums)
-                if len(segment.extra_nums) > 1:
-                    print(Fore.RED + 'Extra numbers found: ' +
-                          extra_nums_string)
-                else:
-                    print(Fore.RED + 'Extra number found: ' +
-                          extra_nums_string)
-                errors_found_overall = True
-            '''
-
             # Results for missing numberss
             if len(segment.missing_nums) > 0:
                 num_string = dict_string(segment.missing_nums)
