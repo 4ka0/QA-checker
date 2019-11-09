@@ -92,7 +92,7 @@ def gather_segments():
         for node in tmx_file.unit_iter():
             jap_text = node.getsource()
             eng_text = node.gettarget()
-            segment = Segment(jap_text, eng_text, [], [], False, [], [],
+            segment = Segment(jap_text, eng_text, [], [], False, {}, {},
                               False, False, False, False, False, False,
                               [], False, [], [], [], {}, {}, False, False, [])
             segments.append(segment)

@@ -6,7 +6,7 @@ def untranslated_check(segments):
     '''
     Function for checking for untranslated segments.
     Segments treated as untranslated if:
-        - the English text is empty
+        - there is no English text
         - the English text contains only whitespace
     '''
     for segment in segments:

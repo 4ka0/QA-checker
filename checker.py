@@ -14,7 +14,6 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 '''
 
-
 import verify
 import gather
 import untranslated
@@ -33,13 +32,11 @@ if __name__ == "__main__":
 
     if verify.user_input_check():
 
-        # Gather Japanese and English translation segments.
         segments = gather.gather_segments()
-
-        # Run checks and output results
         segments = untranslated.untranslated_check(segments)
-        segments = numbers.missing_number_check(segments)
-        segments = numbers.extra_number_check(segments)
+        segments = numbers.number_check(segments)
+        # segments = numbers.missing_number_check(segments)
+        # segments = numbers.extra_number_check(segments)
         segments = spaces.consecutive_space_check(segments)
         segments = spaces.leading_space_check(segments)
         segments = spaces.trailing_space_check(segments)
