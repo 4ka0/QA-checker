@@ -20,7 +20,8 @@ class Segment():
                  repeated_words, unpaired_symbol_found,
                  unpaired_symbols, jap_refnums, eng_refnums,
                  missing_refnums, extra_refnums, untranslated_seg,
-                 jap_char_found, jap_chars):
+                 asian_char_found, asian_chars):
+
         # String, Japanese text
         self.jap_text = jap_text
         # String, English text
@@ -65,10 +66,10 @@ class Segment():
         self.extra_refnums = extra_refnums
         # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
-        # Boolean, True if Japanese character is found in the English text
-        self.jap_char_found = jap_char_found
-        # List of Japanese characters found in the English text
-        self.jap_chars = jap_chars
+        # Boolean, True if an Asian character is found in the English text
+        self.asian_char_found = asian_char_found
+        # List of Asian characters if found in the English text
+        self.asian_chars = asian_chars
 
 
 def gather_segments():

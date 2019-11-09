@@ -36,7 +36,7 @@ if __name__ == "__main__":
         # Gather Japanese and English translation segments.
         segments = gather.gather_segments()
 
-        # Run checks
+        # Run checks and output results
         segments = untranslated.untranslated_check(segments)
         segments = numbers.missing_number_check(segments)
         segments = numbers.extra_number_check(segments)
@@ -48,8 +48,6 @@ if __name__ == "__main__":
         segments = unpaired.unpaired_symbol_check(segments)
         segments = capitals.leading_capital_check(segments)
         segments = punctuation.ending_punctuation_check(segments)
-        segments = characters.jap_character_check(segments)
-        # segments = refnums.refnum_check(segments)
-
-        # Output final results
-        # output.output_results(segments)
+        segments = characters.asian_character_check(segments)
+        segments = refnums.refnum_check(segments)
+        output.output_results(segments)

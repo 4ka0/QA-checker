@@ -109,7 +109,18 @@ def refnum_identify(substring):
     else:
         return False
 
+'''
+CHECK WORDCOUNT_ANNOTATED.PY IS_ASIAN() AND FILTER_JCHARS() FOR A BETTER WAY
 
+def is_asian(char):
+    ideographic_space = 0x3000
+    return ord(char) > ideographic_space
+
+def filter_jchars(char):
+    if is_asian(char):
+        return ' '
+    return char
+'''
 def strip_Japanese_chars(jap_text):
     '''
     Function for removing Japanese characters from a string.

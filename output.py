@@ -22,28 +22,6 @@ def output_results(segments):
                 print(Fore.RED + 'Untranslated segment found.')
                 errors_found_overall = True
 
-            # Results for missing numbers
-            if len(segment.missing_nums) > 0:
-                missing_nums_string = list_string(segment.missing_nums)
-                if len(segment.missing_nums) > 1:
-                    print(Fore.RED + 'Missing numbers found: ' +
-                          missing_nums_string)
-                else:
-                    print(Fore.RED + 'Missing number found: ' +
-                          missing_nums_string)
-                errors_found_overall = True
-
-            # Results for extra numbers
-            if len(segment.extra_nums) > 0:
-                extra_nums_string = list_string(segment.extra_nums)
-                if len(segment.extra_nums) > 1:
-                    print(Fore.RED + 'Extra numbers found: ' +
-                          extra_nums_string)
-                else:
-                    print(Fore.RED + 'Extra number found: ' +
-                          extra_nums_string)
-                errors_found_overall = True
-
             # Results for consecutive spaces
             if segment.consecutive_space_found:
                 print(Fore.RED + 'Consecutive spaces found.')
@@ -76,11 +54,6 @@ def output_results(segments):
                 print(Fore.RED + 'Trailing punctuation does not match.')
                 errors_found_overall = True
 
-            # Results for Japanese character check
-            if segment.jap_char_found:
-                print(Fore.RED + 'Japanese/full-width character found.')
-                errors_found_overall = True
-
             # Results for unpaired symbols
             if segment.unpaired_symbol_found:
                 unpaired_symbol_string = list_string(segment.unpaired_symbols)
@@ -90,6 +63,28 @@ def output_results(segments):
                 else:
                     print(Fore.RED + 'Unpaired symbol found: ' +
                           unpaired_symbol_string)
+                errors_found_overall = True
+
+            # Results for missing numbers
+            if len(segment.missing_nums) > 0:
+                missing_nums_string = list_string(segment.missing_nums)
+                if len(segment.missing_nums) > 1:
+                    print(Fore.RED + 'Missing numbers found: ' +
+                          missing_nums_string)
+                else:
+                    print(Fore.RED + 'Missing number found: ' +
+                          missing_nums_string)
+                errors_found_overall = True
+
+            # Results for extra numbers
+            if len(segment.extra_nums) > 0:
+                extra_nums_string = list_string(segment.extra_nums)
+                if len(segment.extra_nums) > 1:
+                    print(Fore.RED + 'Extra numbers found: ' +
+                          extra_nums_string)
+                else:
+                    print(Fore.RED + 'Extra number found: ' +
+                          extra_nums_string)
                 errors_found_overall = True
 
             # Results for missing aplhanums
@@ -113,6 +108,17 @@ def output_results(segments):
                 else:
                     print(Fore.RED + 'Extra reference number found: ' +
                           refnum_string)
+                errors_found_overall = True
+
+            # Results for Asian characters and symbols
+            if segment.asian_char_found:
+                asian_char_string = list_string(segment.asian_chars)
+                if len(segment.asian_chars) > 1:
+                    print(Fore.RED + 'Asian characters found: ' +
+                          asian_char_string)
+                else:
+                    print(Fore.RED + 'Asian character found: ' +
+                          asian_char_string)
                 errors_found_overall = True
 
             print(Fore.CYAN + 'Japanese:')
