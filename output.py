@@ -83,28 +83,30 @@ def output_results(segments):
                     print(Fore.RED + 'Extra number found: ' + num_string)
                 errors_found_overall = True
 
-            # Results for missing aplhanums
-            if len(segment.missing_refnums) > 0:
-                refnum_string = dict_string(segment.missing_refnums)
-                if ',' in refnum_string:
+            '''
+            Results for missing aplhanums
+            if len(segment.missing_aplhanums) > 0:
+                aplhanum_string = dict_string(segment.missing_aplhanums)
+                if ',' in aplhanum_string:
                     print(
                         Fore.RED + 'Missing reference numbers found: ' +
-                        refnum_string)
+                        aplhanum_string)
                 else:
                     print(Fore.RED + 'Missing reference number found: ' +
-                          refnum_string)
+                          aplhanum_string)
                 errors_found_overall = True
 
-            # Results for extra aplhanums
-            if len(segment.extra_refnums) > 0:
-                refnum_string = dict_string(segment.extra_refnums)
-                if ',' in refnum_string:
+            Results for extra aplhanums
+            if len(segment.extra_aplhanums) > 0:
+                aplhanum_string = dict_string(segment.extra_aplhanums)
+                if ',' in aplhanum_string:
                     print(Fore.RED + 'Extra reference numbers found: ' +
-                          refnum_string)
+                          aplhanum_string)
                 else:
                     print(Fore.RED + 'Extra reference number found: ' +
-                          refnum_string)
+                          aplhanum_string)
                 errors_found_overall = True
+            '''
 
             # Results for Asian characters and symbols
             if segment.asian_char_found:
@@ -144,7 +146,7 @@ def dict_string(error_list):
     '''
     Function for building a single string from a dict.
     E.g. builds a single string from all keys and values in the
-    missing_refnums Counter object of a given segment.
+    missing_aplhanums Counter object of a given segment.
     '''
     error_string = ''
     for item in error_list:

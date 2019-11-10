@@ -5,37 +5,37 @@ import re
 from collections import Counter
 
 
-def refnum_check(segments):
+def aplhanum_check(segments):
     '''
     Function for checking for missing reference numbers which often
     appear in Japanese patent texts, such as '100a' and '240B'.
     '''
 
     # Extract reference numbers from Japanese and English text
-    segments = collect_Jap_refnums(segments)
-    segments = collect_Eng_refnums(segments)
+    segments = collect_Jap_aplhanums(segments)
+    segments = collect_Eng_aplhanums(segments)
 
     # Look for missing and extra reference numbers
     for segment in segments:
 
         # Identifies number of instances of each reference number
-        jap_refnums = Counter(segment.jap_refnums)
-        eng_refnums = Counter(segment.eng_refnums)
+        jap_aplhanums = Counter(segment.jap_aplhanums)
+        eng_aplhanums = Counter(segment.eng_aplhanums)
 
         # Compares reference number instances between Jap and Eng
-        segment.missing_refnums = jap_refnums - eng_refnums
-        segment.extra_refnums = eng_refnums - jap_refnums
+        segment.missing_aplhanums = jap_aplhanums - eng_aplhanums
+        segment.extra_aplhanums = eng_aplhanums - jap_aplhanums
 
         # Raise error flag if necessary
-        if segment.missing_refnums:
+        if segment.missing_aplhanums:
             segment.error_found = True
-        if segment.extra_refnums:
+        if segment.extra_aplhanums:
             segment.error_found = True
 
     return segments
 
 
-def collect_Jap_refnums(segments):
+def collect_Jap_aplhanums(segments):
     '''
     Function for extracting reference numbers from Japanese text.
     '''
@@ -55,19 +55,19 @@ def collect_Jap_refnums(segments):
         # Extract reference numbers from substrings
         for sub in jap_subs:
             # If contains at least one alphabet letter and at least one number
-            if refnum_identify(sub):
+            if aplhanum_identify(sub):
                 # Ignore digits followed by measurement units
                 includes_unit = False
                 for unit in units:
                     if sub.endswith(unit):
                         includes_unit = True
                 if not includes_unit:
-                    segment.jap_refnums.append(sub)
+                    segment.jap_aplhanums.append(sub)
 
     return segments
 
 
-def collect_Eng_refnums(segments):
+def collect_Eng_aplhanums(segments):
     '''
     Function for extracting reference numbers from English text.
     '''
@@ -82,14 +82,14 @@ def collect_Eng_refnums(segments):
         eng_text = clean_string(segment.eng_text)
         eng_words = eng_text.split()
         for word in eng_words:
-            if refnum_identify(word):
+            if aplhanum_identify(word):
                 if word not in ordinals:
-                    segment.eng_refnums.append(word)
+                    segment.eng_aplhanums.append(word)
 
     return segments
 
 
-def refnum_identify(substring):
+def aplhanum_identify(substring):
     '''
     BUG - some reference numbers don't include digits, such as 'BP'
     '''

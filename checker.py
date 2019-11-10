@@ -24,7 +24,6 @@ import unpaired
 import capitals
 import punctuation
 import characters
-import refnums
 import output
 
 

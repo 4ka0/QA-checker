@@ -18,8 +18,8 @@ class Segment():
                  trailing_space_found, capitalization_error_found,
                  trailing_punctuation_error, repeated_word_found,
                  repeated_words, unpaired_symbol_found,
-                 unpaired_symbols, jap_refnums, eng_refnums,
-                 missing_refnums, extra_refnums, untranslated_seg,
+                 unpaired_symbols, jap_aplhanums, eng_aplhanums,
+                 missing_aplhanums, extra_aplhanums, untranslated_seg,
                  asian_char_found, asian_chars):
 
         # String, Japanese text
@@ -54,16 +54,16 @@ class Segment():
         self.unpaired_symbol_found = unpaired_symbol_found
         # List of missing paired symbols if any found
         self.unpaired_symbols = unpaired_symbols
-        # List of reference numbers extracted from Japanese text
-        self.jap_refnums = jap_refnums
-        # List of reference numbers extracted from English text
-        self.eng_refnums = eng_refnums
-        # Counter objects of reference numbers missing from
+        # List of alphanumeric combinations extracted from Japanese text
+        self.jap_aplhanums = jap_aplhanums
+        # List of alphanumeric combinations extracted from English text
+        self.eng_aplhanums = eng_aplhanums
+        # Counter objects of alphanumeric combinations missing from
         # the English text
-        self.missing_refnums = missing_refnums
-        # Counter objects of extra reference numbers found in
+        self.missing_aplhanums = missing_aplhanums
+        # Counter objects of extra alphanumeric combinations found in
         # the English text
-        self.extra_refnums = extra_refnums
+        self.extra_aplhanums = extra_aplhanums
         # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
         # Boolean, True if an Asian character is found in the English text
