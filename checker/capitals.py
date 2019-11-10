@@ -8,7 +8,7 @@ def leading_capital_check(segments):
     has been capitalized.
     '''
     for segment in segments:
-        # Only check is text is present
+        # Only check if text is present
         if segment.eng_text:
             words = segment.eng_text.split()
             first_word = words[0]
