@@ -65,7 +65,7 @@ def output_results(segments):
                           unpaired_symbol_string)
                 errors_found_overall = True
 
-            # Results for missing numberss
+            # Results for missing numbers
             if len(segment.missing_nums) > 0:
                 num_string = dict_string(segment.missing_nums)
                 if ',' in num_string:
@@ -74,7 +74,7 @@ def output_results(segments):
                     print(Fore.RED + 'Missing number found: ' + num_string)
                 errors_found_overall = True
 
-            # Results for extra numberss
+            # Results for extra numbers
             if len(segment.extra_nums) > 0:
                 num_string = dict_string(segment.extra_nums)
                 if ',' in num_string:
@@ -82,31 +82,6 @@ def output_results(segments):
                 else:
                     print(Fore.RED + 'Extra number found: ' + num_string)
                 errors_found_overall = True
-
-            '''
-            Results for missing aplhanums
-            if len(segment.missing_aplhanums) > 0:
-                aplhanum_string = dict_string(segment.missing_aplhanums)
-                if ',' in aplhanum_string:
-                    print(
-                        Fore.RED + 'Missing reference numbers found: ' +
-                        aplhanum_string)
-                else:
-                    print(Fore.RED + 'Missing reference number found: ' +
-                          aplhanum_string)
-                errors_found_overall = True
-
-            Results for extra aplhanums
-            if len(segment.extra_aplhanums) > 0:
-                aplhanum_string = dict_string(segment.extra_aplhanums)
-                if ',' in aplhanum_string:
-                    print(Fore.RED + 'Extra reference numbers found: ' +
-                          aplhanum_string)
-                else:
-                    print(Fore.RED + 'Extra reference number found: ' +
-                          aplhanum_string)
-                errors_found_overall = True
-            '''
 
             # Results for Asian characters and symbols
             if segment.asian_char_found:
