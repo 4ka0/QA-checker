@@ -34,16 +34,20 @@ def ending_punctuation_check(segments):
 
     for segment in segments:
 
-        jap_text = segment.jap_text.strip()
-        eng_text = segment.eng_text.strip()
-        last_jap_char = jap_text[-1]
+        # Only proceed if there is text to check
+        if not segment.jap_text.isspace() and not segment.eng_text.isspace():
 
-        if last_jap_char in jap_punc:
-            last_eng_char = eng_text[-1]
-            # Compare trailing punctuation between Jap and Eng;
-            # these should correspond.
-            corresponding_eng = corresponding_punc[last_jap_char]
-            if last_eng_char != corresponding_eng:
-                segment.trailing_punctuation_error = True
+            jap_text = segment.jap_text.strip()
+            eng_text = segment.eng_text.strip()
+            last_jap_char = jap_text[-1]
+
+            if last_jap_char in jap_punc:
+                last_eng_char = eng_text[-1]
+
+                # Compare trailing punctuation between Jap and Eng
+                # (these should correspond)
+                corresponding_eng = corresponding_punc[last_jap_char]
+                if last_eng_char != corresponding_eng:
+                    segment.trailing_punctuation_error = True
 
     return segments

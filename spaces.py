@@ -5,11 +5,11 @@ def consecutive_space_check(segments):
     '''
     Function for checking if consecutive spaces appear in the target text.
     '''
-    double_space = '  '
+    consecutive_space = '  '
     exception = '.  '  # Not treated as an error (spacing between sentences)
 
     for segment in segments:
-        if (double_space in segment.eng_text) and \
+        if (consecutive_space in segment.eng_text) and \
            (exception not in segment.eng_text):
             segment.consecutive_space_found = True
             segment.error_found = True

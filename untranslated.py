@@ -11,6 +11,8 @@ def untranslated_check(segments):
     for segment in segments:
         if not segment.eng_text:
             segment.untranslated_seg = True
+            segment.error_found = True
         if segment.eng_text.isspace():
             segment.untranslated_seg = True
+            segment.error_found = True
     return segments

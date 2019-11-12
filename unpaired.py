@@ -36,7 +36,7 @@ def unpaired_symbol_check(segments):
             end_symbol = symbol_pairs[start_symbol]
             end_symbol_count = symbol_counts[end_symbol]
             if start_symbol_count != end_symbol_count:
-                segment.unpaired_symbols.append(start_symbol+end_symbol)
+                segment.unpaired_symbols.append(start_symbol + end_symbol)
                 segment.unpaired_symbol_found = True
                 segment.error_found = True
 
