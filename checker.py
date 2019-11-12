@@ -17,7 +17,7 @@ Results sent to stdout.
 import verify
 import gather
 import untranslated
-import numbers
+import digits
 import spaces
 import repeaters
 import unpaired
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
         segments = gather.gather_segments()
         segments = untranslated.untranslated_check(segments)
-        segments = numbers.number_check(segments)
+        segments = digits.digit_check(segments)
         segments = spaces.consecutive_space_check(segments)
         segments = spaces.leading_space_check(segments)
         segments = spaces.trailing_space_check(segments)
