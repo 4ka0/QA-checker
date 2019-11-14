@@ -71,21 +71,18 @@ class Segment():
         self.asian_chars = asian_chars
 
 
-def gather_segments():
+def gather_segments(file):
     '''
     Function for gathering translations segments from a tmx file.
     Translate-toolkit used to parse tmx file.
     http://docs.translatehouse.org/projects/translate-toolkit/en/latest/api/storage.html#module-translate.storage.tmx
     '''
 
-    file = sys.argv[1]
-
     try:
         with open(file, 'rb') as f:
             tmx_file = tmxfile(f)
-    except:
-        print(Fore.RED + 'File not found.')
-        quit()
+    except FileNotFoundError as fnf_error:
+        print(fnf_error)
     else:
         segments = []  # Used as list of Segment objects
         for node in tmx_file.unit_iter():
@@ -95,5 +92,5 @@ def gather_segments():
                               False, False, False, False, False, False,
                               [], False, [], [], [], {}, {}, False, False, [])
             segments.append(segment)
-
-    return segments
+        return segments
+    return None

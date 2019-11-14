@@ -14,6 +14,8 @@ Takes three arguments to execute from the command line:
 Results sent to stdout.
 '''
 
+import sys
+
 import verify
 import gather
 import untranslated
@@ -27,11 +29,9 @@ import characters
 import output
 
 
-if __name__ == "__main__":
-
-    if verify.user_input_check():
-
-        segments = gather.gather_segments()
+def main():
+    if verify.user_input_check(sys.argv):
+        segments = gather.gather_segments(sys.argv[1])
         segments = untranslated.untranslated_check(segments)
         segments = digits.digit_check(segments)
         segments = spaces.consecutive_space_check(segments)
@@ -44,3 +44,7 @@ if __name__ == "__main__":
         segments = punctuation.ending_punctuation_check(segments)
         segments = characters.asian_character_check(segments)
         output.output_results(segments)
+
+
+if __name__ == '__main__':
+    main()

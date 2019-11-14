@@ -9,7 +9,7 @@ def leading_capital_check(segments):
     for segment in segments:
 
         # Only proceed if there is text to check
-        if not segment.jap_text.isspace() and not segment.eng_text.isspace():
+        if (segment.eng_text.isspace() is False) and (segment.eng_text != ''):
 
             words = segment.eng_text.split()
             first_word = words[0]
