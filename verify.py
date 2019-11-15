@@ -10,8 +10,12 @@ init()  # From colorama, used to activate colored output on Windows OS
 def user_input_check(argv):
     '''
     Function for validating user input entered at the command line.
-    Two arguments should have been entered.
-    The second argument should be a tmx file.
+    Aspects checked:
+        Two arguments should have been entered.
+        The second argument should be a tmx file.
+        The existence of the actual tmx file is checked in gather.py
+            (The “easier to ask for forgiveness than permission” (EAFP)
+            approach is used to avoid a race condition.)
     '''
     input_verified = True
 
@@ -32,21 +36,5 @@ def user_input_check(argv):
     if not input_verified:
         print(Fore.RED + 'Please try again using the following format.')
         print(Fore.CYAN + 'python3 checker.py yourfile.tmx')
-
-    '''
-    CHECK FILE ACTUALLY EXISTS HERE RATHER THAN IN GATHER
-    USE FOLLOWING CODE
-    DELETE CORRESPONDING SECTION FROM GATHER
-    THEN RETEST VERIFY
-    '''
-    '''
-    file = argv[1]
-    try:
-        with open(file, 'rb') as f:
-            tmx_file = tmxfile(f)
-    except FileNotFoundError as fnf_error:
-        print(fnf_error)
-    '''
-
 
     return input_verified

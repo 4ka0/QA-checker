@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import sys
 from colorama import Fore
-from translate.storage.tmx import tmxfile
+import xml.etree.ElementTree as ET
+# from translate.storage.tmx import tmxfile
 
 
 class Segment():
@@ -73,24 +73,61 @@ class Segment():
 
 def gather_segments(file):
     '''
-    Function for gathering translations segments from a tmx file.
-    Translate-toolkit used to parse tmx file.
-    http://docs.translatehouse.org/projects/translate-toolkit/en/latest/api/storage.html#module-translate.storage.tmx
+    Function for gathering translation segments from a tmx file.
     '''
 
+    segments = []  # Used as list of Segment objects
+
+    '''
+    An attempt is made to open the tmx file given by the user.
+    If it doesn't exist, an error message is output and the program quits.
+    '''
     try:
+        with open(file, 'rb') as tmx_file:
+            tree = ET.parse(tmx_file)
+    except FileNotFoundError as fnf_error:
+        print(Fore.RED + str(fnf_error))
+        quit()
+    else:
+        root = tree.getroot()
+        header = root.find('./header')
+        source_lang = header.get('srclang')
+        segments = []
+        for tu in root.iter('tu'):
+            target_lang = ''
+            source_text = ''
+            target_text = ''
+            for tuv in tu.iter('tuv'):
+                lang = tuv.get('lang')
+                if lang == source_lang:
+                    source_text = tuv.find('./seg').text
+                else:
+                    target_lang = lang
+                    target_text = tuv.find('./seg').text
+
+            '''
+            FROM HERE
+            Need to:    Add in all of the other parameters
+                        Refactor to include source_lang and target_lang
+            '''
+
+            segment = Segment(source_lang, target_lang,
+                              source_text, target_text)
+            segments.append(segment)
+        return segments
+
+        ''' Prior method using tmxfile module (deprecated function calls)
+
         with open(file, 'rb') as f:
             tmx_file = tmxfile(f)
-    except FileNotFoundError as fnf_error:
-        print(fnf_error)
-    else:
-        segments = []  # Used as list of Segment objects
+
         for node in tmx_file.unit_iter():
+
             jap_text = node.getsource()
             eng_text = node.gettarget()
+
             segment = Segment(jap_text, eng_text, [], [], False, {}, {},
                               False, False, False, False, False, False,
                               [], False, [], [], [], {}, {}, False, False, [])
             segments.append(segment)
-        return segments
-    return None
+        '''

@@ -43,7 +43,7 @@ def main():
         segments = capitals.leading_capital_check(segments)
         segments = punctuation.ending_punctuation_check(segments)
         segments = characters.asian_character_check(segments)
-        output.output_results(segments)
+        # output.output_results(segments)
 
 
 if __name__ == '__main__':

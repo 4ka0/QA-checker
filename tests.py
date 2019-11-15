@@ -22,6 +22,18 @@ def test_constructor():
     assert isinstance(s, Segment)
 
 
+@pytest.fixture
+def tmxfile():
+    tmxfile = '/Volumes/Untitled/test1.tmx'
+    return tmxfile
+
+
+def test_gather_segments(tmxfile):
+    gather.gather_segments(tmxfile)
+
+
+
+
 @pytest.mark.parametrize('user_input,expected',
                          [(['checker.py', 'test.tmx'], True),
                           (['checker.py'], False),
@@ -29,20 +41,6 @@ def test_constructor():
                           (['checker.py', 'test1.txt'], False)])
 def test_user_input_check(user_input, expected):
     assert verify.user_input_check(user_input) == expected
-
-'''
-@pytest.mark.parametrize("test_input,expected", [("3+5", 8), ("2+4", 6), ("6*9", 42)])
-def test_eval(test_input, expected):
-    assert eval(test_input) == expected
-'''
-'''
-@pytest.mark.parametrize('file,expected',
-                         [('/Volumes/Untitled/test.tmx', True),
-                          ('/Volumes/Untitled/translation.tmx', False),
-                          ('test.tmx', False)])
-'''
-# def test_gather_segments():
-#     gather.gather_segments('/Volumes/Untitled/test.tmx')
 
 
 @pytest.fixture
