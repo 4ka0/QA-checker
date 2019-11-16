@@ -15,9 +15,16 @@ def asian_character_check(segments):
     '''
     ideographic_space = 0x3000
     for segment in segments:
-        for char in segment.eng_text:
-            if ord(char) > ideographic_space:
-                segment.error_found = True
-                segment.asian_char_found = True
-                segment.asian_chars.append(char)
+
+        # Only proceed if there is target text
+        if segment.target_text:
+
+            for char in segment.target_text:
+
+                if ord(char) > ideographic_space:
+
+                    segment.error_found = True
+                    segment.asian_char_found = True
+                    segment.asian_chars.append(char)
+
     return(segments)

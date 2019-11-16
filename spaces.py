@@ -9,10 +9,15 @@ def consecutive_space_check(segments):
     exception = '.  '  # Not treated as an error (spacing between sentences)
 
     for segment in segments:
-        if (consecutive_space in segment.eng_text) and \
-           (exception not in segment.eng_text):
-            segment.consecutive_space_found = True
-            segment.error_found = True
+
+        # Only proceed if there is target text.
+        if segment.target_text:
+
+            if (consecutive_space in segment.target_text) and \
+               (exception not in segment.target_text):
+
+                segment.consecutive_space_found = True
+                segment.error_found = True
 
     return segments
 
@@ -24,10 +29,16 @@ def leading_space_check(segments):
     at the start of the source text.
     '''
     for segment in segments:
-        if segment.eng_text.startswith(' '):
-            if not segment.jap_text.startswith(' '):
-                segment.leading_space_found = True
-                segment.error_found = True
+
+        # Only proceed if there is target text.
+        if segment.target_text:
+
+            if segment.target_text.startswith(' '):
+
+                if not segment.source_text.startswith(' '):
+
+                    segment.leading_space_found = True
+                    segment.error_found = True
 
     return segments
 
@@ -39,9 +50,14 @@ def trailing_space_check(segments):
     at the end of the source text.
     '''
     for segment in segments:
-        if segment.eng_text.endswith(' '):
-            if not segment.jap_text.endswith(' '):
-                segment.trailing_space_found = True
-                segment.error_found = True
+
+        # Only proceed if there is target text.
+        if segment.target_text:
+
+            if segment.target_text.endswith(' '):
+
+                if not segment.source_text.endswith(' '):
+                    segment.trailing_space_found = True
+                    segment.error_found = True
 
     return segments

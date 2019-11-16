@@ -93,10 +93,10 @@ def output_results(segments):
                           asian_char_string)
                 errors_found_overall = True
 
-            print(Fore.CYAN + 'Japanese:')
-            print(Fore.RESET + segment.jap_text)
-            print(Fore.CYAN + 'English:')
-            print(Fore.RESET + segment.eng_text)
+            print(Fore.CYAN + 'Source text:')
+            print(Fore.RESET + segment.source_text)
+            print(Fore.CYAN + 'Target text:')
+            print(Fore.RESET + segment.target_text)
             print('\n')
 
     if not errors_found_overall:

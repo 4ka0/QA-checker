@@ -2,72 +2,57 @@
 
 from colorama import Fore
 import xml.etree.ElementTree as ET
-# from translate.storage.tmx import tmxfile
 
 
 class Segment():
     '''
-    Used to create an object for each Japanese-English segment.
+    Used to create an object for each source-target segment.
     Includes actual segment text and numerous variables for QA checks.
     '''
 
-    def __init__(self, jap_text, eng_text, jap_nums, eng_nums,
-                 error_found, missing_nums, extra_nums,
-                 consecutive_space_found, leading_space_found,
-                 trailing_space_found, capitalization_error_found,
-                 trailing_punctuation_error, repeated_word_found,
-                 repeated_words, unpaired_symbol_found,
-                 unpaired_symbols, jap_aplhanums, eng_aplhanums,
-                 missing_aplhanums, extra_aplhanums, untranslated_seg,
-                 asian_char_found, asian_chars):
+    def __init__(self,
+                 source_lang,  # String, source language
+                 target_lang,  # String, target language
+                 source_text,  # String, source text
+                 target_text,  # String, target text
+                 source_nums,  # List, digits extracted from source text
+                 target_nums,  # List, digits extracted from target text
+                 error_found,  # Boolean, True if any errors are found
+                 missing_nums,  # Dict, numbers missing from target text
+                 extra_nums,  # Dict, extra numbers found in target text
+                 consecutive_space_found,  # Boolean, True if found
+                 leading_space_found,  # Boolean, True if found
+                 trailing_space_found,  # Boolean, True if found
+                 capitalization_error_found,  # Boolean, True if found
+                 trailing_punctuation_error,  # Boolean, True if found
+                 repeated_word_found,  # Boolean, True if found
+                 repeated_words,  # List, repeated words if found
+                 unpaired_symbol_found,  # Boolean, True if found
+                 unpaired_symbols,  # List, unpaired symbols if found
+                 untranslated_seg,  # Boolean, True if no target text is found
+                 asian_char_found,  # Boolean, True if found in target text
+                 asian_chars):  # List of Asian chars found in target text
 
-        # String, Japanese text
-        self.jap_text = jap_text
-        # String, English text
-        self.eng_text = eng_text
-        # List of ints, numbers extracted from Japanese text
-        self.jap_nums = jap_nums
-        # List of ints, numbers extracted from English text
-        self.eng_nums = eng_nums
-        # Boolean = True if any errors are found
+        self.source_lang = source_lang
+        self.target_lang = target_lang
+        self.source_text = source_text
+        self.target_text = target_text
+        self.source_nums = source_nums
+        self.target_nums = target_nums
         self.error_found = error_found
-        # List of ints, numbers missing from English text
         self.missing_nums = missing_nums
-        # List of ints, extra numbers found in English text
         self.extra_nums = extra_nums
-        # Boolean, True if consecutive spaces found
         self.consecutive_space_found = consecutive_space_found
-        # Boolean, True if leading space found
         self.leading_space_found = leading_space_found
-        # Boolean, True if trailing space found
         self.trailing_space_found = trailing_space_found
-        # Boolean, True if first word in target text is not capitalized
         self.capitalization_error_found = capitalization_error_found
-        # Boolean, True if first word in target text is not capitalized
         self.trailing_punctuation_error = trailing_punctuation_error
-        # Boolean, True if repeated words found
         self.repeated_word_found = repeated_word_found
-        # List of strings, repeated words if any found
         self.repeated_words = repeated_words
-        # Boolean, True if unpaired symbols found (parentheses etc.)
         self.unpaired_symbol_found = unpaired_symbol_found
-        # List of missing paired symbols if any found
         self.unpaired_symbols = unpaired_symbols
-        # List of alphanumeric combinations extracted from Japanese text
-        self.jap_aplhanums = jap_aplhanums
-        # List of alphanumeric combinations extracted from English text
-        self.eng_aplhanums = eng_aplhanums
-        # Counter objects of alphanumeric combinations missing from
-        # the English text
-        self.missing_aplhanums = missing_aplhanums
-        # Counter objects of extra alphanumeric combinations found in
-        # the English text
-        self.extra_aplhanums = extra_aplhanums
-        # Boolean, True if no English text is found
         self.untranslated_seg = untranslated_seg
-        # Boolean, True if an Asian character is found in the English text
         self.asian_char_found = asian_char_found
-        # List of Asian characters if found in the English text
         self.asian_chars = asian_chars
 
 
@@ -76,7 +61,7 @@ def gather_segments(file):
     Function for gathering translation segments from a tmx file.
     '''
 
-    segments = []  # Used as list of Segment objects
+    segments = []  # List of Segment objects
 
     '''
     An attempt is made to open the tmx file given by the user.
@@ -89,45 +74,96 @@ def gather_segments(file):
         print(Fore.RED + str(fnf_error))
         quit()
     else:
+        '''
+        Basic tmx structure:
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE tmx SYSTEM "tmx11.dtd">
+        <tmx version="1.1">
+            <header srclang="JA" ... />
+            <body>
+            <tu>
+                <tuv lang="JA">
+                    <seg>日本語日本語日本語</seg>
+                </tuv>
+                <tuv lang="EN-US" ... >
+                    <seg>English English English</seg>
+                </tuv>
+            </tu>
+        '''
         root = tree.getroot()
         header = root.find('./header')
         source_lang = header.get('srclang')
         segments = []
+
+        # Look at each 'tu' node
         for tu in root.iter('tu'):
+
             target_lang = ''
             source_text = ''
             target_text = ''
-            for tuv in tu.iter('tuv'):
-                lang = tuv.get('lang')
-                if lang == source_lang:
-                    source_text = tuv.find('./seg').text
-                else:
-                    target_lang = lang
-                    target_text = tuv.find('./seg').text
 
-            '''
-            FROM HERE
-            Need to:    Add in all of the other parameters
-                        Refactor to include source_lang and target_lang
-            '''
+            # Any children present?
+            if len(tu) > 0:
 
-            segment = Segment(source_lang, target_lang,
-                              source_text, target_text)
+                for child in tu:
+
+                    # Only look at 'tuv' children
+                    if child.tag == 'tuv':
+
+                        # Get language
+                        lang = child.get('lang')
+
+                        # Set target language if appropriate
+                        if lang != source_lang:
+                            target_lang = lang
+
+                        # Any children present?
+                        if len(child) > 0:
+
+                            for subchild in child:
+
+                                # Only look at 'seg' child nodes
+                                if subchild.tag == 'seg':
+
+                                    '''
+                                    Source or target text?
+                                    Check if text exists.
+                                    If not, assign empty string
+                                    to avoid 'None' being assigned.
+                                    '''
+                                    if target_lang == '':
+                                        if subchild.text:
+                                            source_text = subchild.text
+                                        else:
+                                            source_text = ''
+                                    else:
+                                        if subchild.text:
+                                            target_text = subchild.text
+                                        else:
+                                            target_text = ''
+
+            segment = Segment(source_lang,
+                              target_lang,
+                              source_text,
+                              target_text,
+                              [],  # source_nums
+                              [],  # target_nums
+                              False,  # error_found
+                              {},  # missing_nums
+                              {},  # extra_nums
+                              False,  # consecutive_space_found
+                              False,  # leading_space_found
+                              False,  # trailing_space_found
+                              False,  # capitalization_error_found
+                              False,  # trailing_punctuation_error
+                              False,  # repeated_word_found
+                              [],  # repeated_words
+                              False,  # unpaired_symbol_found
+                              [],  # unpaired_symbols
+                              False,  # untranslated_seg
+                              False,  # asian_char_found
+                              [])  # asian_chars
+
             segments.append(segment)
+
         return segments
-
-        ''' Prior method using tmxfile module (deprecated function calls)
-
-        with open(file, 'rb') as f:
-            tmx_file = tmxfile(f)
-
-        for node in tmx_file.unit_iter():
-
-            jap_text = node.getsource()
-            eng_text = node.gettarget()
-
-            segment = Segment(jap_text, eng_text, [], [], False, {}, {},
-                              False, False, False, False, False, False,
-                              [], False, [], [], [], {}, {}, False, False, [])
-            segments.append(segment)
-        '''

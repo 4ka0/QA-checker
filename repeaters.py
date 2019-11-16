@@ -11,9 +11,9 @@ def single_word_check(segments):
     for segment in segments:
 
         # Only proceed if there is English text in the segment.
-        if segment.eng_text:
+        if segment.target_text:
             previous_substring = ''
-            substrings = segment.eng_text.split()
+            substrings = segment.target_text.split()
 
             for substring in substrings:
                 current_string = substring
@@ -39,9 +39,9 @@ def double_word_check(segments):
     for segment in segments:
 
         # Only proceed if there is English text in the segment.
-        if segment.eng_text:
+        if segment.target_text:
 
-            substrings = segment.eng_text.split()
+            substrings = segment.target_text.split()
 
             '''
             Loop through substrings one by one.

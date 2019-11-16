@@ -9,10 +9,10 @@ def untranslated_check(segments):
         - the English text contains only whitespace
     '''
     for segment in segments:
-        if not segment.eng_text:
+        if not segment.target_text:
             segment.untranslated_seg = True
             segment.error_found = True
-        if segment.eng_text.isspace():
+        elif segment.target_text.isspace():
             segment.untranslated_seg = True
             segment.error_found = True
     return segments
