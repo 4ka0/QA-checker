@@ -11,10 +11,10 @@ class Segment():
     '''
 
     def __init__(self,
-                 source_lang,  # String, source language
-                 target_lang,  # String, target language
                  source_text,  # String, source text
                  target_text,  # String, target text
+                 source_lang,  # String, source language
+                 target_lang,  # String, target language
                  source_nums,  # List, digits extracted from source text
                  target_nums,  # List, digits extracted from target text
                  error_found,  # Boolean, True if any errors are found
@@ -33,10 +33,10 @@ class Segment():
                  asian_char_found,  # Boolean, True if found in target text
                  asian_chars):  # List of Asian chars found in target text
 
-        self.source_lang = source_lang
-        self.target_lang = target_lang
         self.source_text = source_text
         self.target_text = target_text
+        self.source_lang = source_lang
+        self.target_lang = target_lang
         self.source_nums = source_nums
         self.target_nums = target_nums
         self.error_found = error_found
@@ -142,10 +142,10 @@ def gather_segments(file):
                                         else:
                                             target_text = ''
 
-            segment = Segment(source_lang,
-                              target_lang,
-                              source_text,
+            segment = Segment(source_text,
                               target_text,
+                              source_lang,
+                              target_lang,
                               [],  # source_nums
                               [],  # target_nums
                               False,  # error_found
