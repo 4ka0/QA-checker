@@ -61,10 +61,10 @@ def gather_segments(file):
     Function for gathering translation segments from a tmx file.
     '''
 
-    segments = []  # List of Segment objects
+    segments = []  # To be used as a list of Segment objects
 
     '''
-    An attempt is made to open the tmx file given by the user.
+    Attempt to open the tmx file given by the user.
     If it doesn't exist, an error message is output and the program quits.
     '''
     try:
@@ -102,7 +102,7 @@ def gather_segments(file):
             source_text = ''
             target_text = ''
 
-            # Any children present?
+            # Any children present? Should be 2 'tuv' nodes
             if len(tu) > 0:
 
                 for child in tu:
@@ -117,7 +117,7 @@ def gather_segments(file):
                         if lang != source_lang:
                             target_lang = lang
 
-                        # Any children present?
+                        # Any children present? Should be 1 'seg' node
                         if len(child) > 0:
 
                             for subchild in child:

@@ -12,6 +12,7 @@ def single_word_check(segments):
 
         # Only proceed if there is English text in the segment.
         if segment.target_text:
+
             previous_substring = ''
             substrings = segment.target_text.split()
 

@@ -7,51 +7,59 @@ def ending_punctuation_check(segments):
     end with the same punctuation.
     '''
 
-    # List of Japanese punctuation marks
-    jap_punc = ['\u3001', '\u002C', '\uFF0C', '\uFF64', '\u3002',
-                '\u002E', '\uFF0E', '\uFF61', '\uFF09', '\uFF60',
-                '\uFF3D', '\uFF5D', '\u3015', '\u3017', '\u3011',
-                '\u3019', '\u301B', '\u3009', '\u300B', '\u300D',
-                '\u300F', '\u301C', '\uFF5E', '\u2026', '\u0029',
-                '\u005D', '\u003E', '\u0022']
-
-    # Dict of Japanese punctuation marks and
-    # the corresponding English punctuation marks
-    corresponding_punc = {'\u3001': '\u002C', '\u002C': '\u002C',
-                          '\uFF0C': '\u002C', '\uFF64': '\u002C',
-                          '\u3002': '\u002E', '\u002E': '\u002E',
-                          '\uFF0E': '\u002E', '\uFF61': '\u002E',
-                          '\uFF09': '\u0029', '\uFF60': '\u0029',
-                          '\u0029': '\u0029', '\uFF3D': '\u005D',
-                          '\uFF5D': '\u005D', '\u3015': '\u005D',
-                          '\u3017': '\u005D', '\u3011': '\u005D',
-                          '\u3019': '\u005D', '\u301B': '\u005D',
-                          '\u005D': '\u005D', '\u3009': '\u003E',
-                          '\u003E': '\u003E', '\u300B': '\u003E',
-                          '\u300D': '\u0022', '\u0022': '\u0022',
-                          '\u300F': '\u0022', '\u301C': '\u2026',
-                          '\uFF5E': '\u2026', '\u2026': '\u2026'}
+    '''
+    Dict of ending punctuation marks that could appear in Japanese text.
+    Key: Japanese punctuation mark
+    Value: Corresponding English punctuation mark
+    '''
+    punc_marks = {'\u3001': '\u002C',  # 、 ideographic comma
+                  '\u002C': '\u002C',  # , comma
+                  '\uFF0C': '\u002C',  # ， fullwidth comma
+                  '\uFF64': '\u002C',  # ､ halfwidth ideographic comma
+                  '\u3002': '\u002E',  # 。 ideographic full stop
+                  '\u002E': '\u002E',  # . full stop
+                  '\uFF0E': '\u002E',  # ． fullwidth full stop
+                  '\uFF61': '\u002E',  # ｡ halfwidth ideographic full stop
+                  '\uFF09': '\u0029',  # ） fullwidth right parenthesis
+                  '\uFF60': '\u0029',  # ｠ fullwidth right white parenthesis
+                  '\u0029': '\u0029',  # ) right parenthesis
+                  '\uFF3D': '\u005D',  # ］ fullwidth right square bracket
+                  '\u3015': '\u005D',  # 〕 right tortoise shell bracket
+                  '\u3017': '\u005D',  # 〗 right white lenticular bracket
+                  '\u3011': '\u005D',  # 】 right black lenticular bracket
+                  '\u3019': '\u005D',  # 〙 right white tortoise shell bracket
+                  '\u301B': '\u005D',  # 〛 right white square bracket
+                  '\u005D': '\u005D',  # ] right square bracket
+                  '\uFF5D': '\u7D00',  # ｝ fullwidth right curly bracket
+                  '\u3009': '\u3E00',  # 〉 right angle bracket
+                  '\u300B': '\u3E00',  # 》 right double angle bracket
+                  '\u300D': '\u0022',  # 」 right corner bracket
+                  '\u300F': '\u0022',  # 』 right white corner bracket
+                  '\u301C': '\u2620',  # 〜  wave dash
+                  '\uFF5E': '\u2620',  # ～ fullwidth tilde
+                  '\u2026': '\u2620',  # … horizontal ellipsis
+                  '\u003E': '\u3E00',  # > greater-than sign
+                  '\u0022': '\u0022',  # " quotation mark
+                  '\u0027': '\u0027'}  # ' apostraphe mark
 
     for segment in segments:
 
-        # Only proceed if there is target text.
-        if segment.target_text:
+        # Only proceed if there is source and target text.
+        if segment.source_text and segment.target_text:
 
-            # Only proceed if there is text to check (REQUIRED?)
-            if not segment.source_text.isspace() and \
-               not segment.target_text.isspace():
+            # Strip trailing whitespace if any
+            source_text = segment.source_text.rstrip()
+            target_text = segment.target_text.rstrip()
 
-                source_text = segment.source_text.strip()
-                target_text = segment.target_text.strip()
-                last_source_char = source_text[-1]
+            last_source_char = source_text[-1]
 
-                if last_source_char in jap_punc:
-                    last_target_char = target_text[-1]
+            if last_source_char in punc_marks:
 
-                    # Compare trailing punctuation between Jap and Eng
-                    # (these should correspond)
-                    corresponding_eng = corresponding_punc[last_source_char]
-                    if last_target_char != corresponding_eng:
-                        segment.trailing_punctuation_error = True
+                # Compare trailing punctuation between Jap and Eng
+                last_target_char = target_text[-1]
+                corresponding_mark = punc_marks[last_source_char]
+
+                if last_target_char != corresponding_mark:
+                    segment.trailing_punctuation_error = True
 
     return segments
