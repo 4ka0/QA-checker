@@ -46,20 +46,22 @@ def ending_punctuation_check(segments):
 
         # Only proceed if there is source and target text.
         if segment.source_text and segment.target_text:
+            if not segment.source_text.isspace() and \
+               not segment.target_text.isspace():
 
-            # Strip trailing whitespace if any
-            source_text = segment.source_text.rstrip()
-            target_text = segment.target_text.rstrip()
+                # Strip trailing whitespace if any
+                source_text = segment.source_text.rstrip()
+                target_text = segment.target_text.rstrip()
 
-            last_source_char = source_text[-1]
+                last_source_char = source_text[-1]
 
-            if last_source_char in punc_marks:
+                if last_source_char in punc_marks:
 
-                # Compare trailing punctuation between Jap and Eng
-                last_target_char = target_text[-1]
-                corresponding_mark = punc_marks[last_source_char]
+                    # Compare trailing punctuation between Jap and Eng
+                    last_target_char = target_text[-1]
+                    corresponding_mark = punc_marks[last_source_char]
 
-                if last_target_char != corresponding_mark:
-                    segment.trailing_punctuation_error = True
+                    if last_target_char != corresponding_mark:
+                        segment.trailing_punctuation_error = True
 
     return segments

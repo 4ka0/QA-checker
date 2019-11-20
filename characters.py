@@ -3,7 +3,7 @@
 
 def asian_character_check(segments):
     '''
-    Identifies Asian characters included in the English text of a given
+    Identifies Asian characters included in the target English text of a given
     segment. A character is defined as being Asian if the Unicode code
     point of the character is greater than that for the ideographic space
     (doublebyte/fullwidth space). This results in characters such as the
@@ -18,13 +18,14 @@ def asian_character_check(segments):
 
         # Only proceed if there is target text
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            for char in segment.target_text:
+                for char in segment.target_text:
 
-                if ord(char) > ideographic_space:
+                    if ord(char) > ideographic_space:
 
-                    segment.error_found = True
-                    segment.asian_char_found = True
-                    segment.asian_chars.append(char)
+                        segment.error_found = True
+                        segment.asian_char_found = True
+                        segment.asian_chars.append(char)
 
     return(segments)

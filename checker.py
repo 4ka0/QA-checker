@@ -32,7 +32,6 @@ import output
 def main():
     if verify.user_input_check(sys.argv):
         segments = gather.gather_segments(sys.argv[1])
-
         segments = untranslated.untranslated_check(segments)
         segments = digits.digit_check(segments)
         segments = spaces.consecutive_space_check(segments)

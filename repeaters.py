@@ -10,22 +10,23 @@ def single_word_check(segments):
 
     for segment in segments:
 
-        # Only proceed if there is English text in the segment.
+        # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            previous_substring = ''
-            substrings = segment.target_text.split()
+                previous_substring = ''
+                substrings = segment.target_text.split()
 
-            for substring in substrings:
-                current_string = substring
+                for substring in substrings:
+                    current_string = substring
 
-                if previous_substring.lower() == current_string.lower():
-                    segment.error_found = True
-                    segment.repeated_word_found = True
-                    segment.repeated_words.append(previous_substring +
-                                                  ' ' + current_string)
+                    if previous_substring.lower() == current_string.lower():
+                        segment.error_found = True
+                        segment.repeated_word_found = True
+                        segment.repeated_words.append(previous_substring +
+                                                      ' ' + current_string)
 
-                previous_substring = current_string
+                    previous_substring = current_string
 
     return segments
 
@@ -39,28 +40,29 @@ def double_word_check(segments):
 
     for segment in segments:
 
-        # Only proceed if there is English text in the segment.
+        # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            substrings = segment.target_text.split()
+                substrings = segment.target_text.split()
 
-            '''
-            Loop through substrings one by one.
-            Build and compare two-word combinations based on
-            current substring and next substring.
-            '''
-            i = 0
-            while (i + 3) < len(substrings):
-                substring_A = substrings[i] + ' ' + substrings[i + 1]
-                substring_B = substrings[i + 2] + ' ' + substrings[i + 3]
+                '''
+                Loop through substrings one by one.
+                Build and compare two-word combinations based on
+                current substring and next substring.
+                '''
+                i = 0
+                while (i + 3) < len(substrings):
+                    substring_A = substrings[i] + ' ' + substrings[i + 1]
+                    substring_B = substrings[i + 2] + ' ' + substrings[i + 3]
 
-                # Compare substrings
-                if substring_A == substring_B:
-                    segment.error_found = True
-                    segment.repeated_word_found = True
-                    segment.repeated_words.append(substring_A + ' '
-                                                  + substring_B)
+                    # Compare substrings
+                    if substring_A == substring_B:
+                        segment.error_found = True
+                        segment.repeated_word_found = True
+                        segment.repeated_words.append(substring_A + ' '
+                                                      + substring_B)
 
-                i += 1
+                    i += 1
 
     return segments

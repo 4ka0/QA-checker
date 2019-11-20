@@ -32,8 +32,6 @@ def test_gather_segments(tmxfile):
     gather.gather_segments(tmxfile)
 
 
-
-
 @pytest.mark.parametrize('user_input,expected',
                          [(['checker.py', 'test.tmx'], True),
                           (['checker.py'], False),
@@ -109,28 +107,28 @@ def test_asian_character_check(segments):
 
 def test_digit_check(segments):
     digits.digit_check(segments)
-    assert segments[0].jap_nums == ['12', '3']
-    assert segments[0].eng_nums == ['12', '3']
+    assert segments[0].source_nums == ['12', '3']
+    assert segments[0].target_nums == ['12', '3']
     assert segments[0].missing_nums == {}
     assert segments[0].extra_nums == {}
     assert segments[0].error_found is False
-    assert segments[1].jap_nums == ['14', '1', '50', '10', '40']
-    assert segments[1].eng_nums == ['14', '1', '１０', '10', '40']
+    assert segments[1].source_nums == ['14', '1', '50', '10', '40']
+    assert segments[1].target_nums == ['14', '1', '１０', '10', '40']
     assert segments[1].missing_nums == {'50': 1}
     assert segments[1].extra_nums == {'１０': 1}
     assert segments[1].error_found is True
-    assert segments[2].jap_nums == ['16', '2', '18']
-    assert segments[2].eng_nums == ['18', '2', '18']
+    assert segments[2].source_nums == ['16', '2', '18']
+    assert segments[2].target_nums == ['18', '2', '18']
     assert segments[2].missing_nums == {'16': 1}
     assert segments[2].extra_nums == {'18': 1}
     assert segments[2].error_found is True
-    assert segments[3].jap_nums == ['14', '36', '38', '14', '40', '14', '42']
-    assert segments[3].eng_nums == ['15', '36', '36', '14', '40', '16', '42']
+    assert segments[3].source_nums == ['14', '36', '38', '14', '40', '14', '42']
+    assert segments[3].target_nums == ['15', '36', '36', '14', '40', '16', '42']
     assert segments[3].missing_nums == {'38': 1, '14': 2}
     assert segments[3].extra_nums == {'15': 1, '36': 1, '16': 1}
     assert segments[3].error_found is True
-    assert segments[4].jap_nums == []
-    assert segments[4].eng_nums == []
+    assert segments[4].source_nums == []
+    assert segments[4].target_nums == []
     assert segments[4].missing_nums == {}
     assert segments[4].extra_nums == {}
     assert segments[4].error_found is False

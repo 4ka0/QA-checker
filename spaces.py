@@ -12,12 +12,13 @@ def consecutive_space_check(segments):
 
         # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            if (consecutive_space in segment.target_text) and \
-               (exception not in segment.target_text):
+                if (consecutive_space in segment.target_text) and \
+                   (exception not in segment.target_text):
 
-                segment.consecutive_space_found = True
-                segment.error_found = True
+                    segment.consecutive_space_found = True
+                    segment.error_found = True
 
     return segments
 
@@ -32,13 +33,14 @@ def leading_space_check(segments):
 
         # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            if segment.target_text.startswith(' '):
+                if segment.target_text.startswith(' '):
 
-                if not segment.source_text.startswith(' '):
+                    if not segment.source_text.startswith(' '):
 
-                    segment.leading_space_found = True
-                    segment.error_found = True
+                        segment.leading_space_found = True
+                        segment.error_found = True
 
     return segments
 
@@ -53,11 +55,12 @@ def trailing_space_check(segments):
 
         # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            if segment.target_text.endswith(' '):
+                if segment.target_text.endswith(' '):
 
-                if not segment.source_text.endswith(' '):
-                    segment.trailing_space_found = True
-                    segment.error_found = True
+                    if not segment.source_text.endswith(' '):
+                        segment.trailing_space_found = True
+                        segment.error_found = True
 
     return segments

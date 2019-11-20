@@ -10,12 +10,13 @@ def leading_capital_check(segments):
 
         # Only proceed if there is target text.
         if segment.target_text:
+            if not segment.target_text.isspace():
 
-            text = segment.target_text.lstrip()
-            first_char = text[0]
+                text = segment.target_text.lstrip()
+                first_char = text[0]
 
-            if first_char.isalpha() and first_char.islower():
-                segment.capitalization_error_found = True
-                segment.error_found = True
+                if first_char.isalpha() and first_char.islower():
+                    segment.capitalization_error_found = True
+                    segment.error_found = True
 
     return segments
