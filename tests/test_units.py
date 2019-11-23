@@ -16,6 +16,9 @@ import untranslated
 
 
 def test_constructor():
+    '''
+    Test instantiation
+    '''
     s = Segment('なお、正孔輸送層12は、NiO、（またはMoO3）等の無機材料を含んでいてもよい。',
                 'moreover, the positive  hole transport layers 12 may include an inorganic material such as NiO (or MoO3].',
                 '', '', [], [], False, {}, {}, False, False, False, False, False, False, [], False, [], False, False, [])
@@ -24,6 +27,9 @@ def test_constructor():
 
 @pytest.fixture
 def tmxfile():
+    '''
+    Path to actual full-length tmx file
+    '''
     tmxfile = '/Volumes/Untitled/test1.tmx'
     return tmxfile
 
@@ -38,11 +44,17 @@ def test_gather_segments(tmxfile):
                           (['checker.py', 'test1.tmx', 'test2.tmx'], False),
                           (['checker.py', 'test1.txt'], False)])
 def test_user_input_check(user_input, expected):
+    '''
+    Test that incorrect user input is not accepted
+    '''
     assert verify.user_input_check(user_input) == expected
 
 
 @pytest.fixture
 def segments():
+    '''
+    Segment objects containing various errors to be caught.
+    '''
     segments = []
     segment0 = Segment('なお、正孔輸送層12は、NiO、（またはMoO3）等の無機材料を含んでいてもよい。',
                        'moreover, the positive  hole transport layers 12 may include an inorganic material such as NiO (or MoO3].',
@@ -72,6 +84,9 @@ def segments():
 
 
 def test_leading_capital_check(segments):
+    '''
+    Testing for correct leading capitalization.
+    '''
     assert len(segments) == 6
     capitals.leading_capital_check(segments)
     assert segments[0].capitalization_error_found is True
@@ -87,6 +102,9 @@ def test_leading_capital_check(segments):
 
 
 def test_asian_character_check(segments):
+    '''
+    Testing that any Asian characters found in English text is caught.
+    '''
     characters.asian_character_check(segments)
     assert segments[0].asian_char_found is False
     assert segments[0].error_found is False
@@ -106,6 +124,9 @@ def test_asian_character_check(segments):
 
 
 def test_digit_check(segments):
+    '''
+    Testing that missing and extra digits are correctly detected.
+    '''
     digits.digit_check(segments)
     assert segments[0].source_nums == ['12', '3']
     assert segments[0].target_nums == ['12', '3']
@@ -135,6 +156,9 @@ def test_digit_check(segments):
 
 
 def test_ending_punctuation_check(segments):
+    '''
+    Testing that ending punctuation errors are correctly detected.
+    '''
     punctuation.ending_punctuation_check(segments)
     assert segments[0].trailing_punctuation_error is False
     assert segments[1].trailing_punctuation_error is True
@@ -144,6 +168,9 @@ def test_ending_punctuation_check(segments):
 
 
 def test_unpaired_symbol_check(segments):
+    '''
+    Testing that unpaired symbols are correctly detected.
+    '''
     unpaired.unpaired_symbol_check(segments)
     assert segments[0].unpaired_symbols == ['()', '[]']
     assert segments[0].unpaired_symbol_found is True
@@ -163,6 +190,9 @@ def test_unpaired_symbol_check(segments):
 
 
 def test_single_word_check(segments):
+    '''
+    Testing that repeated words are correctly detected.
+    '''
     repeaters.single_word_check(segments)
     assert segments[0].error_found is False
     assert segments[0].repeated_word_found is False
@@ -182,6 +212,9 @@ def test_single_word_check(segments):
 
 
 def test_double_word_check(segments):
+    '''
+    Testing that repeated words are correctly detected.
+    '''
     repeaters.double_word_check(segments)
     assert segments[0].error_found is False
     assert segments[0].repeated_word_found is False
@@ -201,6 +234,9 @@ def test_double_word_check(segments):
 
 
 def test_consecutive_space_check(segments):
+    '''
+    Testing that whitespace-related errors are correctly detected.
+    '''
     spaces.consecutive_space_check(segments)
     spaces.leading_space_check(segments)
     spaces.trailing_space_check(segments)
@@ -227,6 +263,9 @@ def test_consecutive_space_check(segments):
 
 
 def test_untranslated_check(segments):
+    '''
+    Testing that untranslated segments are correctly detected.
+    '''
     untranslated.untranslated_check(segments)
     assert segments[5].untranslated_seg is True
     assert segments[5].error_found is True
