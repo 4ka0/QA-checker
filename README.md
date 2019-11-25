@@ -13,7 +13,7 @@ Checks for the following issues:
 - Inconsistent ending punctuation
 - Fullwidth characters in target
 
-Takes three arguments to execute from the command line:
+Takes three arguments to execute from the command line:<br/>
 python3 checker.py yourfile.tmx
 
-Results sent to stdout
+Results sent to stdout.
