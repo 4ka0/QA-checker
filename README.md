@@ -17,3 +17,5 @@ Takes three arguments to execute from the command line:<br/>
 python3 checker.py yourfile.tmx
 
 Results sent to stdout.
+
+(Tested with Python 3.7.5 on macOS 10.14.6)
