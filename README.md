@@ -14,7 +14,7 @@ Checks for the following issues:
 - Fullwidth characters in target
 
 Takes three arguments to execute from the command line:<br/>
-python3&nbsp;&nbsp;checker.py&nbsp;&nbsp;yourfile.tmx
+python3&nbsp;&nbsp;&nbsp;checker.py&nbsp;&nbsp;&nbsp;yourfile.tmx
 
 Results sent to stdout.
 
