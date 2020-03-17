@@ -72,7 +72,6 @@ def gather_segments(file):
             tree = ET.parse(tmx_file)
     except FileNotFoundError as fnf_error:
         print(Fore.RED + str(fnf_error))
-        quit()
     else:
         '''
         Basic tmx structure:
