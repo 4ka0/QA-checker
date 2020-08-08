@@ -1,4 +1,4 @@
-# Honyaku checker
+# Honyaku Checker
 
 A command line script for performing basic QA checks on a tmx file of a Japanese to English translation.
 
