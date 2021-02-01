@@ -36,6 +36,12 @@ python3 main.py translation.tmx
 * Visual Studio Code 1.44.2
 * macOS 10.14.6
 
+### Example output:
+
+(Please excuse the blurring but the text here was confidential.)
+
+![alt text](readme_screenshot.png "Screenshot")</br>
+
 ### License
 
 Licensed under the MIT License.
