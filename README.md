@@ -40,7 +40,7 @@ python3 main.py translation.tmx
 
 (Please excuse the blurring but the text here was confidential.)
 
-<img src="screenshot.png" width="700"></br>
+<img src="screenshot.png" width="650"></br>
 
 ### License
 
