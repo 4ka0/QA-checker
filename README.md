@@ -40,7 +40,7 @@ python3 main.py translation.tmx
 
 (Please excuse the blurring but the text here was confidential.)
 
-![alt text](readme_screenshot.png "Screenshot")</br>
+<img src="readme_screenshot.png" width="600"></br>
 
 ### License
 
