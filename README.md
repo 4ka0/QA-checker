@@ -38,7 +38,7 @@ python3 main.py translation.tmx
 
 ### Example output:
 
-(Please excuse the blurring but the text here was confidential.)
+(Please excuse the blurring but the text here is confidential.)
 
 <img src="screenshot.png" width="650"></br>
 
