@@ -41,7 +41,3 @@ python3 main.py translation.tmx
 (Please excuse the blurring but the text here is confidential.)
 
 <img src="screenshot.png" width="650"></br>
-
-### License
-
-Licensed under the MIT License.
